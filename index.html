@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070a12">
+<title>ASTERRA — The First Million</title>
+<meta name="description" content="ASTERRA. The First Million. Join Generation One and claim your place in a new digital Mars experience.">
+
+<style>
+:root {
+  --bg: #070a12;
+  --text: #f4f3f0;
+  --muted: #939baa;
+  --accent: #df8d65;
+  --line: rgba(255,255,255,.12);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+button { font: inherit; cursor: pointer; }
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+#stars {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.site {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  min-height: 86px;
+  padding: 22px clamp(24px,5vw,90px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: .22em;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  font-size: 10px;
+  letter-spacing: .17em;
+  color: #c5cad1;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #82c7a8;
+  box-shadow: 0 0 12px #82c7a8;
+}
+main {
+  width: 100%;
+  max-width: 1600px;
+  margin: auto;
+  padding: 50px clamp(24px,5vw,90px);
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+}
+.hero { position: relative; z-index: 3; }
+.eyebrow {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: .27em;
+  margin-bottom: 24px;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(52px,7vw,112px);
+  font-weight: 700;
+  letter-spacing: -.075em;
+  line-height: .98;
+}
+h1 span { color: var(--accent); }
+.subtitle {
+  font-size: clamp(19px,2.1vw,29px);
+  letter-spacing: .12em;
+  margin: 24px 0;
+  font-weight: 300;
+}
+.description {
+  max-width: 430px;
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--muted);
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 38px;
+}
+.btn {
+  padding: 17px 24px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.035);
+  color: white;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: .12em;
+  transition: .2s;
+}
+.btn:hover { border-color: var(--accent); }
+.btn.primary {
+  background: #f1ede8;
+  color: #10131a;
+  border-color: #f1ede8;
+}
+.btn.primary:hover { background: #df8d65; }
+.planet-section {
+  min-width: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.planet-frame {
+  width: 100%;
+  height: clamp(330px,43vw,660px);
+  position: relative;
+  touch-action: pan-y;
+  cursor: grab;
+}
+.planet-frame:active { cursor: grabbing; }
+#planetCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.planet-frame::after {
+  content: "";
+  position: absolute;
+  inset: 5%;
+  background: radial-gradient(ellipse,
+    rgba(189,83,43,.07),transparent 67%);
+  pointer-events: none;
+}
+.planet-label {
+  margin-top: -16px;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: .26em;
+  color: #e1e0e0;
+}
+.planet-hint {
+  margin-top: 13px;
+  color: #79818f;
+  font-size: 10px;
+  letter-spacing: .1em;
+}
+.stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  margin-top: 35px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.stat-label {
+  color: #89909e;
+  font-size: 9px;
+  letter-spacing: .14em;
+}
+.stat-value {
+  font-size: 16px;
+  letter-spacing: .07em;
+}
+footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  border-top: 1px solid var(--line);
+  padding: 22px clamp(24px,5vw,90px);
+  color: #858c99;
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+footer strong { color: #d8dbe0; }
+@media(max-width:800px) {
+  header { min-height: 70px; }
+  .logo { font-size: 19px; }
+  .header-right { font-size: 9px; }
+  main {
+    display: flex;
+    flex-direction: column;
+    padding-top: 44px;
+    padding-bottom: 35px;
+    gap: 25px;
+  }
+  .hero { width: 100%; }
+  h1 { font-size: clamp(53px,13vw,82px); }
+  .description { font-size: 14px; }
+  .actions { margin-top: 25px; }
+  .planet-section { width: 100%; }
+  .planet-frame { height: clamp(300px,85vw,520px); }
+  .stats { margin-top: 30px; }
+  .stat-value { font-size: 13px; }
+}
+@media(max-width:380px) {
+  .btn { padding: 14px 15px; font-size: 10px; }
+  .stat-label { font-size: 8px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<div class="site">
+<header>
+  <div class="logo">ASTERRA</div>
+  <div class="header-right">
+    <span class="dot"></span>
+    <span>GENERATION ONE</span>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="eyebrow">WELCOME TO A NEW GENERATION</div>
+    <h1>THE FIRST<br><span>MILLION.</span></h1>
+    <div class="subtitle">GENERATION ONE</div>
+    <p class="description">
+      One planet. One million pioneers.
+      A new digital generation begins on Mars.
+      Your identity. Your place. Your story.
+    </p>
+    <div class="actions">
+      <button class="btn primary" id="exploreBtn">
+        EXPLORE MARS &rarr;
+      </button>
+      <button class="btn" id="aboutBtn">
+        THE MISSION
+      </button>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-label">DESTINATION</span>
+        <span class="stat-value">MARS</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">GENERATION</span>
+        <span class="stat-value">ONE</span>
+      </div>
+      <div class="stat">
+        <span class="stat-label">ENTRY PRICE</span>
+        <span class="stat-value">$5</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="planet-section" id="marsSection"
+    aria-label="Interactive Mars preview">
+    <div class="planet-frame" id="planetFrame">
+      <canvas id="planetCanvas"
+        aria-label="Rotating illustration of Mars">
+      </canvas>
+    </div>
+    <div class="planet-label">MARS / 001</div>
+    <div class="planet-hint">
+      DRAG TO ROTATE &bull; SCROLL TO ZOOM
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 ASTERRA</span>
+  <span>THE FIRST MILLION <strong>/ GENERATION ONE</strong></span>
+  <span>EARLY DEVELOPMENT PREVIEW</span>
+</footer>
+</div>
+
+<script>
+"use strict";
+
+// STARFIELD
+const starsCanvas = document.getElementById("stars");
+const starsCtx = starsCanvas.getContext("2d");
+let stars = [];
+let starWidth = 0;
+let starHeight = 0;
+let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+
+function resizeStars() {
+  starWidth = window.innerWidth;
+  starHeight = window.innerHeight;
+  starsCanvas.width = Math.round(starWidth * pixelRatio);
+  starsCanvas.height = Math.round(starHeight * pixelRatio);
+  starsCtx.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+  const count = Math.min(450,
+    Math.floor(starWidth * starHeight / 2700));
+  stars = Array.from({length:count}, () => ({
+    x: Math.random() * starWidth,
+    y: Math.random() * starHeight,
+    r: Math.random() * 1.1 + .15,
+    a: Math.random() * .65 + .15,
+    phase: Math.random() * Math.PI * 2
+  }));
+}
+resizeStars();
+window.addEventListener("resize", resizeStars);
+
+function drawStars(time) {
+  starsCtx.clearRect(0,0,starWidth,starHeight);
+  for(const s of stars) {
+    const alpha = s.a * (.8 +
+      .2 * Math.sin(time * .0006 + s.phase));
+    starsCtx.fillStyle = `rgba(220,230,255,${alpha})`;
+    starsCtx.beginPath();
+    starsCtx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    starsCtx.fill();
+  }
+}
+
+// MARS: LIGHTWEIGHT CANVAS PREVIEW
+// No external libraries or downloads required.
+// This is a stylized prototype, not yet NASA terrain.
+
+const frame = document.getElementById("planetFrame");
+const canvas = document.getElementById("planetCanvas");
+const ctx = canvas.getContext("2d");
+let width = 0, height = 0;
+let rotation = .5;
+let tilt = -.14;
+let zoom = 1;
+let dragging = false;
+let previousX = 0, previousY = 0;
+let moved = false;
+let lastFrame = 0;
+
+function resizePlanet() {
+  const rect = frame.getBoundingClientRect();
+  width = rect.width;
+  height = rect.height;
+  pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = Math.round(width * pixelRatio);
+  canvas.height = Math.round(height * pixelRatio);
+  ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);
+}
+resizePlanet();
+window.addEventListener("resize", resizePlanet);
+
+// Deterministic pseudo-random terrain patterns.
+function noise(x,y) {
+  const n = Math.sin(x*127.1+y*311.7)*43758.5453;
+  return n-Math.floor(n);
+}
+function terrain(lon,lat) {
+  return (
+    .42*Math.sin(lon*3.2+Math.sin(lat*4.1))+
+    .25*Math.sin(lon*8.5-lat*6.4)+
+    .13*Math.sin(lon*17+lat*12)+
+    .09*Math.sin(lon*31-lat*22)
+  );
+}
+
+// Pre-render a stylized equirectangular Mars map.
+const texture = document.createElement("canvas");
+texture.width = 1024;
+texture.height = 512;
+const tx = texture.getContext("2d");
+const image = tx.createImageData(1024,512);
+for(let y=0;y<512;y++) {
+  const lat = Math.PI/2-y/512*Math.PI;
+  for(let x=0;x<1024;x++) {
+    const lon = x/1024*Math.PI*2;
+    const t = terrain(lon,lat);
+    const grain = noise(Math.floor(x/3),Math.floor(y/3))-.5;
+    const polar = Math.max(0,
+      (Math.abs(lat)-1.29)/.25);
+    const v = Math.max(-1,Math.min(1,t+grain*.11));
+    const i = (y*1024+x)*4;
+    const highland = v > .1;
+    let r = highland ? 170+v*46 : 132+v*45;
+    let g = highland ? 85+v*27 : 67+v*30;
+    let b = highland ? 56+v*17 : 49+v*20;
+    const ice = Math.min(1,polar);
+    image.data[i] = r*(1-ice)+211*ice;
+    image.data[i+1] = g*(1-ice)+181*ice;
+    image.data[i+2] = b*(1-ice)+160*ice;
+    image.data[i+3] = 255;
+  }
+}
+tx.putImageData(image,0,0);
+
+// Render the globe in a cached offscreen buffer.
+const globe = document.createElement("canvas");
+globe.width = 420;
+globe.height = 420;
+const gx = globe.getContext("2d");
+const globeImage = gx.createImageData(420,420);
+const texPixels = tx.getImageData(0,0,1024,512).data;
+let lastRenderedRotation = -999;
+let lastRenderedTilt = -999;
+
+function renderGlobe() {
+  const size = 420;
+  const radius = 207;
+  const sinT = Math.sin(tilt), cosT = Math.cos(tilt);
+  const sinR = Math.sin(rotation), cosR = Math.cos(rotation);
+  for(let py=0;py<size;py++) {
+    const ny = (size/2-py)/radius;
+    for(let px=0;px<size;px++) {
+      const nx = (px-size/2)/radius;
+      const rr = nx*nx+ny*ny;
+      const i=(py*size+px)*4;
+      if(rr>=1) {
+        globeImage.data[i+3]=0;
+        continue;
+      }
+      const nz=Math.sqrt(1-rr);
+      // Inverse tilt and longitude rotation.
+      const yy=ny*cosT-nz*sinT;
+      const zz=ny*sinT+nz*cosT;
+      const xx=nx*cosR+zz*sinR;
+      const z=zz*cosR-nx*sinR;
+      const lon=Math.atan2(xx,z);
+      const lat=Math.asin(Math.max(-1,Math.min(1,yy)));
+      const u=((lon/(2*Math.PI)+.5)%1+1)%1;
+      const v=.5-lat/Math.PI;
+      const sx=Math.min(1023,Math.floor(u*1024));
+      const sy=Math.max(0,Math.min(511,Math.floor(v*512)));
+      const si=(sy*1024+sx)*4;
+      const light=Math.max(0,nx*(-.46)+ny*.36+nz*.82);
+      const shade=.13+.87*Math.pow(light,.8);
+      const rim=Math.pow(1-nz,3);
+      globeImage.data[i]=Math.min(255,
+        texPixels[si]*shade+rim*13);
+      globeImage.data[i+1]=Math.min(255,
+        texPixels[si+1]*shade+rim*7);
+      globeImage.data[i+2]=Math.min(255,
+        texPixels[si+2]*shade+rim*5);
+      globeImage.data[i+3]=255;
+    }
+  }
+  gx.putImageData(globeImage,0,0);
+}
+
+function drawPlanet() {
+  ctx.clearRect(0,0,width,height);
+  const r=Math.min(width,height)*.43*zoom;
+  const cx=width/2, cy=height/2;
+
+  const glow=ctx.createRadialGradient(
+    cx,cy,r*.55,cx,cy,r*1.65);
+  glow.addColorStop(0,"rgba(185,80,45,.20)");
+  glow.addColorStop(.5,"rgba(135,51,31,.09)");
+  glow.addColorStop(1,"rgba(135,51,31,0)");
+  ctx.fillStyle=glow;
+  ctx.beginPath();
+  ctx.arc(cx,cy,r*1.65,0,Math.PI*2);
+  ctx.fill();
+
+  if(Math.abs(rotation-lastRenderedRotation)>.003 ||
+     Math.abs(tilt-lastRenderedTilt)>.003) {
+    renderGlobe();
+    lastRenderedRotation=rotation;
+    lastRenderedTilt=tilt;
+  }
+  ctx.drawImage(globe,cx-r,cy-r,r*2,r*2);
+}
+
+frame.addEventListener("pointerdown", e => {
+  dragging=true;
+  moved=false;
+  previousX=e.clientX;
+  previousY=e.clientY;
+  frame.setPointerCapture(e.pointerId);
+});
+frame.addEventListener("pointermove",e=>{
+  if(!dragging)return;
+  const dx=e.clientX-previousX;
+  const dy=e.clientY-previousY;
+  if(Math.abs(dx)+Math.abs(dy)>1)moved=true;
+  rotation+=dx*.008;
+  tilt=Math.max(-1.2,Math.min(1.2,tilt+dy*.005));
+  previousX=e.clientX;
+  previousY=e.clientY;
+});
+function endDrag(){dragging=false;}
+frame.addEventListener("pointerup",endDrag);
+frame.addEventListener("pointercancel",endDrag);
+
+frame.addEventListener("wheel",e=>{
+  e.preventDefault();
+  zoom=Math.max(.65,Math.min(1.45,
+    zoom+(e.deltaY<0?.08:-.08)));
+},{passive:false});
+
+let touchDistance=0;
+frame.addEventListener("touchstart",e=>{
+  if(e.touches.length===2) {
+    touchDistance=Math.hypot(
+      e.touches[0].clientX-e.touches[1].clientX,
+      e.touches[0].clientY-e.touches[1].clientY);
+  }
+},{passive:true});
+frame.addEventListener("touchmove",e=>{
+  if(e.touches.length===2) {
+    const d=Math.hypot(
+      e.touches[0].clientX-e.touches[1].clientX,
+      e.touches[0].clientY-e.touches[1].clientY);
+    if(touchDistance) {
+      zoom=Math.max(.65,Math.min(1.45,
+        zoom*d/touchDistance));
+    }
+    touchDistance=d;
+  }
+},{passive:true});
+
+const reducedMotion=window.matchMedia(
+  "(prefers-reduced-motion: reduce)").matches;
+
+function animate(time) {
+  const dt=Math.min(50,time-lastFrame||16);
+  lastFrame=time;
+  if(!dragging&&!reducedMotion) {
+    rotation+=dt*.000075;
+  }
+  drawStars(time);
+  drawPlanet();
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+
+// Prototype buttons: no fake registration or checkout.
+document.getElementById("exploreBtn")
+  .addEventListener("click",()=>{
+    document.getElementById("marsSection")
+      .scrollIntoView({behavior:"smooth",block:"center"});
+  });
+document.getElementById("aboutBtn")
+  .addEventListener("click",()=>{
+    alert(
+      "ASTERRA — THE FIRST MILLION\n\n"+
+      "Generation One is the first generation of "+
+      "one million digital Mars participants.\n\n"+
+      "This is an early interactive preview. "+
+      "Registration and payments are not yet active."
+    );
+  });
+</script>
+</body>
+</html>
