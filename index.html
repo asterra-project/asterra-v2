@@ -2,583 +2,819 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#070a12">
-<title>ASTERRA — The First Million</title>
-<meta name="description" content="ASTERRA. The First Million. Join Generation One and claim your place in a new digital Mars experience.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090b0f">
+<title>ASTERRA — THE FIRST MILLION</title>
+<meta name="description" content="ASTERRA. The First Million. Generation One. Choose your place on Mars.">
 
 <style>
 :root {
-  --bg: #070a12;
-  --text: #f4f3f0;
-  --muted: #939baa;
-  --accent: #df8d65;
-  --line: rgba(255,255,255,.12);
+  --bg:#090b0f;
+  --panel:#12151a;
+  --line:#30343b;
+  --text:#f3f0ea;
+  --muted:#a5a4a2;
+  --accent:#d7a36c;
 }
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+* {box-sizing:border-box}
+html {scroll-behavior:smooth}
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
-button { font: inherit; cursor: pointer; }
-button:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
-}
-#stars {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-}
-.site {
-  position: relative;
-  z-index: 1;
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-}
+button,input {font:inherit}
+button {cursor:pointer}
+a {color:inherit;text-decoration:none}
+.wrap {width:min(1180px,calc(100% - 40px));margin:auto}
 header {
-  min-height: 86px;
-  padding: 22px clamp(24px,5vw,90px);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:#090b0fee;
+  position:sticky;
+  top:0;
+  z-index:20;
+  backdrop-filter:blur(15px);
+}
+.nav {
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
 }
 .logo {
-  font-size: 23px;
-  font-weight: 800;
-  letter-spacing: .22em;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:5px;
 }
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  font-size: 10px;
-  letter-spacing: .17em;
-  color: #c5cad1;
+.navlinks {display:flex;gap:28px;align-items:center}
+.navlinks a {font-size:12px;letter-spacing:1.5px;color:#ccc}
+.navlinks a:hover {color:var(--accent)}
+.tag {
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:3px;
+  font-weight:bold;
 }
-.dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #82c7a8;
-  box-shadow: 0 0 12px #82c7a8;
+.hero {
+  position:relative;
+  min-height:510px;
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+  background:
+    linear-gradient(90deg,#090b0f 6%,#090b0fd9 43%,#090b0f22),
+    radial-gradient(ellipse at 75% 55%,#884a2b 0%,#362119 35%,#090b0f 75%);
 }
-main {
-  width: 100%;
-  max-width: 1600px;
-  margin: auto;
-  padding: 50px clamp(24px,5vw,90px);
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  align-items: center;
-  gap: 20px;
-  flex: 1;
+.hero-art {
+  position:absolute;
+  right:-9%;
+  top:0;
+  width:76%;
+  height:100%;
+  object-fit:cover;
+  opacity:.56;
+  mask-image:linear-gradient(90deg,transparent,#000 45%);
 }
-.hero { position: relative; z-index: 3; }
-.eyebrow {
-  color: var(--accent);
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: .27em;
-  margin-bottom: 24px;
-}
+.hero-content {position:relative;z-index:1;padding:85px 0}
 h1 {
-  margin: 0;
-  font-size: clamp(52px,7vw,112px);
-  font-weight: 700;
-  letter-spacing: -.075em;
-  line-height: .98;
+  font-size:clamp(45px,7vw,94px);
+  line-height:1.04;
+  letter-spacing:-3px;
+  margin:22px 0;
+  font-weight:700;
 }
-h1 span { color: var(--accent); }
-.subtitle {
-  font-size: clamp(19px,2.1vw,29px);
-  letter-spacing: .12em;
-  margin: 24px 0;
-  font-weight: 300;
-}
-.description {
-  max-width: 430px;
-  font-size: 15px;
-  line-height: 1.9;
-  color: var(--muted);
-}
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 38px;
+.hero p {
+  color:#d2cfca;
+  max-width:490px;
+  font-size:17px;
+  line-height:1.7;
 }
 .btn {
-  padding: 17px 24px;
-  border: 1px solid var(--line);
-  background: rgba(255,255,255,.035);
-  color: white;
-  font-size: 11px;
-  font-weight: bold;
-  letter-spacing: .12em;
-  transition: .2s;
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  min-height:48px;
+  padding:13px 23px;
+  border:1px solid var(--accent);
+  background:var(--accent);
+  color:#15110e;
+  font-size:12px;
+  letter-spacing:1.5px;
+  font-weight:bold;
+  text-align:center;
+  transition:.2s;
 }
-.btn:hover { border-color: var(--accent); }
-.btn.primary {
-  background: #f1ede8;
-  color: #10131a;
-  border-color: #f1ede8;
+.btn:hover {filter:brightness(1.12)}
+.btn.outline {background:transparent;color:var(--accent)}
+.btn:disabled {opacity:.45;cursor:not-allowed}
+.actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+section {padding:80px 0}
+.section-head {margin-bottom:32px}
+.section-head h2 {
+  font-size:clamp(29px,4vw,48px);
+  letter-spacing:-1px;
+  margin:12px 0;
 }
-.btn.primary:hover { background: #df8d65; }
-.planet-section {
-  min-width: 0;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.section-head p {color:var(--muted);line-height:1.7}
+.filters {display:flex;gap:10px;flex-wrap:wrap;margin:30px 0}
+.filter {
+  padding:11px 16px;
+  background:transparent;
+  border:1px solid var(--line);
+  color:#c5c2bd;
+  font-size:11px;
+  letter-spacing:1.5px;
 }
-.planet-frame {
-  width: 100%;
-  height: clamp(330px,43vw,660px);
-  position: relative;
-  touch-action: pan-y;
-  cursor: grab;
+.filter.active,.filter:hover {
+  color:var(--accent);
+  border-color:var(--accent);
 }
-.planet-frame:active { cursor: grabbing; }
-#planetCanvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+.gallery {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
 }
-.planet-frame::after {
-  content: "";
-  position: absolute;
-  inset: 5%;
-  background: radial-gradient(ellipse,
-    rgba(189,83,43,.07),transparent 67%);
-  pointer-events: none;
+.place {
+  min-width:0;
+  background:var(--panel);
+  border:1px solid var(--line);
+  overflow:hidden;
+  transition:border-color .2s,transform .2s;
 }
-.planet-label {
-  margin-top: -16px;
-  text-align: center;
-  font-size: 11px;
-  letter-spacing: .26em;
-  color: #e1e0e0;
+.place:hover {border-color:var(--accent);transform:translateY(-3px)}
+.photo {
+  position:relative;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  background:linear-gradient(135deg,#38271f,#9c5d36 48%,#241c1c);
 }
-.planet-hint {
-  margin-top: 13px;
-  color: #79818f;
-  font-size: 10px;
-  letter-spacing: .1em;
+.photo img {
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
 }
-.stats {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 16px;
-  margin-top: 35px;
-  padding-top: 24px;
-  border-top: 1px solid var(--line);
+.photo .loading {
+  position:absolute;
+  inset:0;
+  display:grid;
+  place-items:center;
+  color:#e8c2a0;
+  font-size:11px;
+  letter-spacing:2px;
 }
-.stat {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
+.photo:has(img[src]) .loading {display:none}
+.place-info {padding:20px}
+.place-info h3 {font-size:21px;margin:7px 0}
+.place-info p {font-size:13px;color:var(--muted);line-height:1.6}
+.place-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:22px;
 }
-.stat-label {
-  color: #89909e;
-  font-size: 9px;
-  letter-spacing: .14em;
+.price {font-size:22px;font-weight:bold;color:var(--accent)}
+.small-btn {
+  background:transparent;
+  border:1px solid var(--accent);
+  color:var(--accent);
+  padding:11px 14px;
+  font-size:11px;
+  letter-spacing:1px;
 }
-.stat-value {
-  font-size: 16px;
-  letter-spacing: .07em;
+.small-btn:hover {background:#d7a36c20}
+.feature {
+  display:grid;
+  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+  gap:42px;
+  align-items:center;
 }
-footer {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  border-top: 1px solid var(--line);
-  padding: 22px clamp(24px,5vw,90px);
-  color: #858c99;
-  font-size: 10px;
-  letter-spacing: .12em;
+.feature-image {
+  aspect-ratio:5/4;
+  background:#35241e;
+  overflow:hidden;
 }
-footer strong { color: #d8dbe0; }
-@media(max-width:800px) {
-  header { min-height: 70px; }
-  .logo { font-size: 19px; }
-  .header-right { font-size: 9px; }
-  main {
-    display: flex;
-    flex-direction: column;
-    padding-top: 44px;
-    padding-bottom: 35px;
-    gap: 25px;
-  }
-  .hero { width: 100%; }
-  h1 { font-size: clamp(53px,13vw,82px); }
-  .description { font-size: 14px; }
-  .actions { margin-top: 25px; }
-  .planet-section { width: 100%; }
-  .planet-frame { height: clamp(300px,85vw,520px); }
-  .stats { margin-top: 30px; }
-  .stat-value { font-size: 13px; }
+.feature-image img {width:100%;height:100%;object-fit:cover}
+.feature h2 {font-size:clamp(30px,4vw,54px);margin:14px 0}
+.feature p {color:var(--muted);line-height:1.8}
+.details {border-top:1px solid var(--line);margin:24px 0}
+.detail {
+  padding:13px 0;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--line);
+  font-size:13px;
 }
-@media(max-width:380px) {
-  .btn { padding: 14px 15px; font-size: 10px; }
-  .stat-label { font-size: 8px; }
+.detail span:first-child {color:var(--muted)}
+.detail span:last-child {text-align:right;overflow-wrap:anywhere}
+.steps {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
 }
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
+.step {
+  border-top:1px solid var(--accent);
+  padding:23px 0;
+}
+.step strong {color:var(--accent);font-size:13px}
+.step h3 {font-size:21px;margin:18px 0 10px}
+.step p {color:var(--muted);font-size:14px;line-height:1.7}
+.card-section {background:#101318}
+.certificate {
+  max-width:470px;
+  margin:auto;
+  border:1px solid #99744c;
+  padding:15px;
+  background:linear-gradient(145deg,#202024,#0c0e12);
+  box-shadow:0 25px 80px #0008;
+}
+.certificate-inner {
+  border:1px solid #554432;
+  padding:25px;
+  min-width:0;
+}
+.cert-top {
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  font-size:11px;
+  color:var(--accent);
+  letter-spacing:2px;
+}
+.cert-photo {
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  margin:25px 0 18px;
+  background:#35241e;
+}
+.cert-number {
+  font-size:clamp(26px,6vw,42px);
+  letter-spacing:2px;
+  font-weight:700;
+  margin:10px 0;
+  overflow-wrap:anywhere;
+}
+.cert-meta {
+  color:#bcb5ad;
+  font-size:12px;
+  line-height:1.8;
+}
+.cert-bottom {
+  border-top:1px solid #554432;
+  margin-top:25px;
+  padding-top:16px;
+  color:var(--accent);
+  font-size:11px;
+  letter-spacing:2px;
+}
+.preview-note {font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
+footer {border-top:1px solid var(--line);padding:35px 0;color:var(--muted);font-size:12px}
+.footer-inner {display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.overlay {
+  position:fixed;
+  inset:0;
+  background:#000c;
+  display:none;
+  z-index:100;
+  padding:20px;
+  overflow-y:auto;
+  align-items:center;
+  justify-content:center;
+}
+.overlay.open {display:flex}
+.modal {
+  width:min(540px,100%);
+  max-height:calc(100vh - 40px);
+  overflow-y:auto;
+  background:#14171c;
+  border:1px solid #60513e;
+  padding:26px;
+}
+.modal-head {display:flex;justify-content:space-between;gap:15px;align-items:start}
+.modal-head h2 {font-size:28px;margin:7px 0 20px}
+.close {
+  border:0;
+  background:transparent;
+  color:white;
+  font-size:27px;
+}
+.modal-image {
+  width:100%;
+  aspect-ratio:16/10;
+  object-fit:cover;
+  background:#38271f;
+}
+.field-label {display:block;color:var(--muted);font-size:12px;margin:22px 0 8px}
+.email {
+  width:100%;
+  padding:14px;
+  border:1px solid var(--line);
+  background:#090b0f;
+  color:white;
+  outline:none;
+}
+.email:focus {border-color:var(--accent)}
+.notice {font-size:12px;color:var(--muted);line-height:1.7}
+.modal-buttons {display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.source {color:var(--accent);font-size:12px;text-decoration:underline}
+.status {font-size:12px;color:var(--accent);margin-top:12px;min-height:18px}
+[hidden] {display:none!important}
+
+@media(max-width:850px) {
+  .gallery {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .feature {grid-template-columns:1fr}
+  .steps {grid-template-columns:1fr;gap:0}
+  .hero-art {width:100%;right:-25%;opacity:.4}
+}
+@media(max-width:580px) {
+  .wrap {width:calc(100% - 28px)}
+  .nav {min-height:65px}
+  .logo {font-size:19px;letter-spacing:3px}
+  .navlinks {gap:12px}
+  .navlinks a {font-size:10px;letter-spacing:0}
+  .navlinks a:last-child {display:none}
+  .hero {min-height:470px}
+  .hero-content {padding:70px 0}
+  h1 {font-size:clamp(39px,11vw,62px);letter-spacing:-1.5px}
+  .hero p {font-size:15px}
+  section {padding:55px 0}
+  .gallery {grid-template-columns:1fr;gap:16px}
+  .photo {aspect-ratio:16/10}
+  .filter {font-size:10px;padding:10px}
+  .feature {gap:25px}
+  .certificate-inner {padding:16px}
+  .cert-top {font-size:9px;letter-spacing:1px}
+  .modal {padding:17px}
+  .modal-head h2 {font-size:24px}
+  .btn {width:100%}
+  .modal-buttons .btn {width:100%}
 }
 </style>
 </head>
 
 <body>
-<canvas id="stars" aria-hidden="true"></canvas>
 
-<div class="site">
 <header>
-  <div class="logo">ASTERRA</div>
-  <div class="header-right">
-    <span class="dot"></span>
-    <span>GENERATION ONE</span>
+  <div class="wrap nav">
+    <a class="logo" href="#">ASTERRA</a>
+    <nav class="navlinks">
+      <a href="#explore">EXPLORE</a>
+      <a href="#generation">GENERATION ONE</a>
+      <a href="#how">HOW IT WORKS</a>
+    </nav>
   </div>
 </header>
 
 <main>
-  <section class="hero">
-    <div class="eyebrow">WELCOME TO A NEW GENERATION</div>
-    <h1>THE FIRST<br><span>MILLION.</span></h1>
-    <div class="subtitle">GENERATION ONE</div>
-    <p class="description">
-      One planet. One million pioneers.
-      A new digital generation begins on Mars.
-      Your identity. Your place. Your story.
-    </p>
-    <div class="actions">
-      <button class="btn primary" id="exploreBtn">
-        EXPLORE MARS &rarr;
-      </button>
-      <button class="btn" id="aboutBtn">
-        THE MISSION
-      </button>
-    </div>
-    <div class="stats">
-      <div class="stat">
-        <span class="stat-label">DESTINATION</span>
-        <span class="stat-value">MARS</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">GENERATION</span>
-        <span class="stat-value">ONE</span>
-      </div>
-      <div class="stat">
-        <span class="stat-label">ENTRY PRICE</span>
-        <span class="stat-value">$5</span>
-      </div>
-    </div>
-  </section>
 
-  <section class="planet-section" id="marsSection"
-    aria-label="Interactive Mars preview">
-    <div class="planet-frame" id="planetFrame">
-      <canvas id="planetCanvas"
-        aria-label="Rotating illustration of Mars">
-      </canvas>
+<div class="hero">
+  <img id="heroImage" class="hero-art" alt="Mars landscape">
+  <div class="wrap hero-content">
+    <div class="tag">ASTERRA · GENERATION ONE</div>
+    <h1>THE FIRST<br>MILLION</h1>
+    <p>Choose your favorite place on Mars.
+       Join the first generation and receive
+       your own unique digital identity.</p>
+    <div class="actions">
+      <a class="btn" href="#explore">EXPLORE MARS</a>
+      <a class="btn outline" href="#generation">GENERATION ONE</a>
     </div>
-    <div class="planet-label">MARS / 001</div>
-    <div class="planet-hint">
-      DRAG TO ROTATE &bull; SCROLL TO ZOOM
+  </div>
+</div>
+
+<section id="explore">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">DISCOVER MARS</div>
+      <h2>Explore the surface</h2>
+      <p>Discover remarkable places on Mars.
+         Choose the location that speaks to you.</p>
     </div>
-  </section>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-filter="ALL">ALL</button>
+      <button class="filter" data-filter="CANYONS">CANYONS</button>
+      <button class="filter" data-filter="CRATERS">CRATERS</button>
+      <button class="filter" data-filter="DUNES">DUNES</button>
+      <button class="filter" data-filter="MOUNTAINS">MOUNTAINS</button>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+  </div>
+</section>
+
+<section id="generation" class="card-section">
+  <div class="wrap">
+    <div class="feature">
+      <div class="feature-image">
+        <img id="featureImage" alt="Selected Mars location">
+      </div>
+      <div>
+        <div class="tag">ASTERRA · GENERATION ONE</div>
+        <h2>THE FIRST MILLION</h2>
+        <p>One million unique identities.
+           One first generation.
+           Your number becomes part of ASTERRA's history.</p>
+        <div class="details">
+          <div class="detail"><span>MEMBERSHIP</span><span>GENERATION ONE</span></div>
+          <div class="detail"><span>PERSONAL ID</span><span>Assigned after payment</span></div>
+          <div class="detail"><span>DIGITAL CARD</span><span>Included</span></div>
+          <div class="detail"><span>PRICE</span><span>$5</span></div>
+        </div>
+        <a href="#explore" class="btn">CHOOSE YOUR PLACE — $5</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="tag">SIMPLE BY DESIGN</div>
+      <h2>How it works</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <strong>01</strong>
+        <h3>Choose a place</h3>
+        <p>Explore authentic images of Mars and select your favorite location.</p>
+      </div>
+      <div class="step">
+        <strong>02</strong>
+        <h3>Pay $5</h3>
+        <p>No account required. Email is optional. Secure payment will be available at launch.</p>
+      </div>
+      <div class="step">
+        <strong>03</strong>
+        <h3>Save and share</h3>
+        <p>Receive your digital card and share it on Instagram, Facebook, X and elsewhere.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="card-section">
+  <div class="wrap">
+    <div class="section-head" style="text-align:center">
+      <div class="tag">YOUR DIGITAL IDENTITY</div>
+      <h2>GENERATION ONE</h2>
+      <p>A personal digital card. A unique number. Your chosen place on Mars.</p>
+    </div>
+    <div class="certificate">
+      <div class="certificate-inner">
+        <div class="cert-top">
+          <strong>ASTERRA</strong>
+          <span>GENERATION ONE</span>
+        </div>
+        <img id="cardImage" class="cert-photo" alt="Mars location">
+        <div class="tag">THE FIRST MILLION</div>
+        <div class="cert-number">#000001</div>
+        <div class="cert-meta" id="cardLocation">EXAMPLE CARD · LOCATION PREVIEW</div>
+        <div class="cert-bottom">ASTERRA · THE FIRST MILLION</div>
+      </div>
+    </div>
+    <div class="preview-note">
+      Example only. Real numbers are assigned after confirmed payment.
+    </div>
+  </div>
+</section>
+
 </main>
 
 <footer>
-  <span>© 2026 ASTERRA</span>
-  <span>THE FIRST MILLION <strong>/ GENERATION ONE</strong></span>
-  <span>EARLY DEVELOPMENT PREVIEW</span>
+  <div class="wrap footer-inner">
+    <span>© ASTERRA · THE FIRST MILLION</span>
+    <span>Digital identity only. No land ownership or official citizenship.</span>
+  </div>
 </footer>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <div class="tag">YOUR SELECTED PLACE</div>
+        <h2 id="modalTitle">Location</h2>
+      </div>
+      <button class="close" id="closeModal" aria-label="Close">×</button>
+    </div>
+
+    <img class="modal-image" id="modalImage" alt="Selected Mars landscape">
+
+    <div class="details">
+      <div class="detail"><span>LOCATION</span><span id="modalPlace"></span></div>
+      <div class="detail"><span>CATEGORY</span><span id="modalCategory"></span></div>
+      <div class="detail"><span>COORDINATES</span><span id="modalCoords"></span></div>
+      <div class="detail"><span>PRICE</span><span>$5</span></div>
+    </div>
+
+    <a id="sourceLink" class="source" target="_blank" rel="noopener">
+      View original NASA image and source
+    </a>
+
+    <label class="field-label" for="email">EMAIL (OPTIONAL)</label>
+    <input class="email" id="email" type="email" placeholder="you@example.com">
+
+    <p class="notice">
+      Email is optional. At launch, it can be used to send
+      your digital card. No account registration required.
+    </p>
+
+    <div class="modal-buttons">
+      <button class="btn" id="payButton" disabled>PAY $5 · COMING SOON</button>
+      <button class="btn outline" id="sharePreview">SHARE PLACE</button>
+      <button class="btn outline" id="copyPreview">COPY PLACE LINK</button>
+    </div>
+    <div class="status" id="status"></div>
+    <p class="notice">
+      This is a preview. Payment and personal ID issuance
+      are not active yet.
+    </p>
+  </div>
 </div>
 
 <script>
 "use strict";
 
-// STARFIELD
-const starsCanvas = document.getElementById("stars");
-const starsCtx = starsCanvas.getContext("2d");
-let stars = [];
-let starWidth = 0;
-let starHeight = 0;
-let pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+/*
+  NASA image search:
+  We load original NASA catalog results rather than
+  stretching an AI-generated screenshot.
 
-function resizeStars() {
-  starWidth = window.innerWidth;
-  starHeight = window.innerHeight;
-  starsCanvas.width = Math.round(starWidth * pixelRatio);
-  starsCanvas.height = Math.round(starHeight * pixelRatio);
-  starsCtx.setTransform(pixelRatio,0,0,pixelRatio,0,0);
-  const count = Math.min(450,
-    Math.floor(starWidth * starHeight / 2700));
-  stars = Array.from({length:count}, () => ({
-    x: Math.random() * starWidth,
-    y: Math.random() * starHeight,
-    r: Math.random() * 1.1 + .15,
-    a: Math.random() * .65 + .15,
-    phase: Math.random() * Math.PI * 2
-  }));
-}
-resizeStars();
-window.addEventListener("resize", resizeStars);
+  Some catalog results may have no preview image.
+  In that case, a neutral placeholder remains visible.
 
-function drawStars(time) {
-  starsCtx.clearRect(0,0,starWidth,starHeight);
-  for(const s of stars) {
-    const alpha = s.a * (.8 +
-      .2 * Math.sin(time * .0006 + s.phase));
-    starsCtx.fillStyle = `rgba(220,230,255,${alpha})`;
-    starsCtx.beginPath();
-    starsCtx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    starsCtx.fill();
+  Coordinates are deliberately not invented.
+  They will be added only after source verification.
+*/
+
+const places = [
+  {
+    id:"valles-marineris",
+    name:"Valles Marineris",
+    category:"CANYONS",
+    query:"Valles Marineris Mars",
+    description:"The immense canyon system of Mars.",
+    coordinates:"Source verification pending"
+  },
+  {
+    id:"gale-crater",
+    name:"Gale Crater",
+    category:"CRATERS",
+    query:"Gale Crater Mars Curiosity",
+    description:"An extraordinary landscape explored by Curiosity.",
+    coordinates:"Source verification pending"
+  },
+  {
+    id:"martian-dunes",
+    name:"Martian Dunes",
+    category:"DUNES",
+    query:"Mars sand dunes HiRISE",
+    description:"Sculpted patterns across the Martian surface.",
+    coordinates:"Source verification pending"
+  },
+  {
+    id:"olympus-mons",
+    name:"Olympus Mons",
+    category:"MOUNTAINS",
+    query:"Olympus Mons Mars",
+    description:"The giant volcanic mountain of Mars.",
+    coordinates:"Source verification pending"
+  },
+  {
+    id:"noctis-labyrinthus",
+    name:"Noctis Labyrinthus",
+    category:"CANYONS",
+    query:"Noctis Labyrinthus Mars",
+    description:"A dramatic network of valleys and fractures.",
+    coordinates:"Source verification pending"
+  },
+  {
+    id:"jezero-crater",
+    name:"Jezero Crater",
+    category:"CRATERS",
+    query:"Jezero Crater Mars Perseverance",
+    description:"A remarkable location explored by Perseverance.",
+    coordinates:"Source verification pending"
   }
+];
+
+const gallery = document.getElementById("gallery");
+const overlay = document.getElementById("overlay");
+const status = document.getElementById("status");
+let currentPlace = null;
+
+function el(tag,className,text) {
+  const node = document.createElement(tag);
+  if(className) node.className = className;
+  if(text !== undefined) node.textContent = text;
+  return node;
 }
 
-// MARS: LIGHTWEIGHT CANVAS PREVIEW
-// No external libraries or downloads required.
-// This is a stylized prototype, not yet NASA terrain.
-
-const frame = document.getElementById("planetFrame");
-const canvas = document.getElementById("planetCanvas");
-const ctx = canvas.getContext("2d");
-let width = 0, height = 0;
-let rotation = .5;
-let tilt = -.14;
-let zoom = 1;
-let dragging = false;
-let previousX = 0, previousY = 0;
-let moved = false;
-let lastFrame = 0;
-
-function resizePlanet() {
-  const rect = frame.getBoundingClientRect();
-  width = rect.width;
-  height = rect.height;
-  pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-  canvas.width = Math.round(width * pixelRatio);
-  canvas.height = Math.round(height * pixelRatio);
-  ctx.setTransform(pixelRatio,0,0,pixelRatio,0,0);
-}
-resizePlanet();
-window.addEventListener("resize", resizePlanet);
-
-// Deterministic pseudo-random terrain patterns.
-function noise(x,y) {
-  const n = Math.sin(x*127.1+y*311.7)*43758.5453;
-  return n-Math.floor(n);
-}
-function terrain(lon,lat) {
-  return (
-    .42*Math.sin(lon*3.2+Math.sin(lat*4.1))+
-    .25*Math.sin(lon*8.5-lat*6.4)+
-    .13*Math.sin(lon*17+lat*12)+
-    .09*Math.sin(lon*31-lat*22)
-  );
-}
-
-// Pre-render a stylized equirectangular Mars map.
-const texture = document.createElement("canvas");
-texture.width = 1024;
-texture.height = 512;
-const tx = texture.getContext("2d");
-const image = tx.createImageData(1024,512);
-for(let y=0;y<512;y++) {
-  const lat = Math.PI/2-y/512*Math.PI;
-  for(let x=0;x<1024;x++) {
-    const lon = x/1024*Math.PI*2;
-    const t = terrain(lon,lat);
-    const grain = noise(Math.floor(x/3),Math.floor(y/3))-.5;
-    const polar = Math.max(0,
-      (Math.abs(lat)-1.29)/.25);
-    const v = Math.max(-1,Math.min(1,t+grain*.11));
-    const i = (y*1024+x)*4;
-    const highland = v > .1;
-    let r = highland ? 170+v*46 : 132+v*45;
-    let g = highland ? 85+v*27 : 67+v*30;
-    let b = highland ? 56+v*17 : 49+v*20;
-    const ice = Math.min(1,polar);
-    image.data[i] = r*(1-ice)+211*ice;
-    image.data[i+1] = g*(1-ice)+181*ice;
-    image.data[i+2] = b*(1-ice)+160*ice;
-    image.data[i+3] = 255;
+function showImage(img,url) {
+  if(!url) {
+    img.removeAttribute("src");
+    img.alt = "NASA image not available";
+    return;
   }
-}
-tx.putImageData(image,0,0);
-
-// Render the globe in a cached offscreen buffer.
-const globe = document.createElement("canvas");
-globe.width = 420;
-globe.height = 420;
-const gx = globe.getContext("2d");
-const globeImage = gx.createImageData(420,420);
-const texPixels = tx.getImageData(0,0,1024,512).data;
-let lastRenderedRotation = -999;
-let lastRenderedTilt = -999;
-
-function renderGlobe() {
-  const size = 420;
-  const radius = 207;
-  const sinT = Math.sin(tilt), cosT = Math.cos(tilt);
-  const sinR = Math.sin(rotation), cosR = Math.cos(rotation);
-  for(let py=0;py<size;py++) {
-    const ny = (size/2-py)/radius;
-    for(let px=0;px<size;px++) {
-      const nx = (px-size/2)/radius;
-      const rr = nx*nx+ny*ny;
-      const i=(py*size+px)*4;
-      if(rr>=1) {
-        globeImage.data[i+3]=0;
-        continue;
-      }
-      const nz=Math.sqrt(1-rr);
-      // Inverse tilt and longitude rotation.
-      const yy=ny*cosT-nz*sinT;
-      const zz=ny*sinT+nz*cosT;
-      const xx=nx*cosR+zz*sinR;
-      const z=zz*cosR-nx*sinR;
-      const lon=Math.atan2(xx,z);
-      const lat=Math.asin(Math.max(-1,Math.min(1,yy)));
-      const u=((lon/(2*Math.PI)+.5)%1+1)%1;
-      const v=.5-lat/Math.PI;
-      const sx=Math.min(1023,Math.floor(u*1024));
-      const sy=Math.max(0,Math.min(511,Math.floor(v*512)));
-      const si=(sy*1024+sx)*4;
-      const light=Math.max(0,nx*(-.46)+ny*.36+nz*.82);
-      const shade=.13+.87*Math.pow(light,.8);
-      const rim=Math.pow(1-nz,3);
-      globeImage.data[i]=Math.min(255,
-        texPixels[si]*shade+rim*13);
-      globeImage.data[i+1]=Math.min(255,
-        texPixels[si+1]*shade+rim*7);
-      globeImage.data[i+2]=Math.min(255,
-        texPixels[si+2]*shade+rim*5);
-      globeImage.data[i+3]=255;
-    }
-  }
-  gx.putImageData(globeImage,0,0);
+  img.src = url;
 }
 
-function drawPlanet() {
-  ctx.clearRect(0,0,width,height);
-  const r=Math.min(width,height)*.43*zoom;
-  const cx=width/2, cy=height/2;
+function renderGallery(filter="ALL") {
+  gallery.replaceChildren();
 
-  const glow=ctx.createRadialGradient(
-    cx,cy,r*.55,cx,cy,r*1.65);
-  glow.addColorStop(0,"rgba(185,80,45,.20)");
-  glow.addColorStop(.5,"rgba(135,51,31,.09)");
-  glow.addColorStop(1,"rgba(135,51,31,0)");
-  ctx.fillStyle=glow;
-  ctx.beginPath();
-  ctx.arc(cx,cy,r*1.65,0,Math.PI*2);
-  ctx.fill();
+  places
+    .filter(p=>filter==="ALL" || p.category===filter)
+    .forEach(p=>{
+      const card = el("article","place");
+      const photo = el("div","photo");
+      const img = el("img");
+      img.alt = p.name;
+      img.loading = "lazy";
+      showImage(img,p.image);
+      photo.append(img);
 
-  if(Math.abs(rotation-lastRenderedRotation)>.003 ||
-     Math.abs(tilt-lastRenderedTilt)>.003) {
-    renderGlobe();
-    lastRenderedRotation=rotation;
-    lastRenderedTilt=tilt;
-  }
-  ctx.drawImage(globe,cx-r,cy-r,r*2,r*2);
+      const loading = el("div","loading",
+        p.image ? "NASA IMAGE" : "IMAGE LOADING");
+      photo.append(loading);
+
+      const info = el("div","place-info");
+      const category = el("div","tag",p.category);
+      const name = el("h3","",p.name);
+      const description = el("p","",p.description);
+      const bottom = el("div","place-bottom");
+      const price = el("span","price","$5");
+      const button = el("button","small-btn","SELECT PLACE");
+
+      button.addEventListener("click",()=>openPlace(p));
+
+      bottom.append(price,button);
+      info.append(category,name,description,bottom);
+      card.append(photo,info);
+      gallery.append(card);
+    });
 }
 
-frame.addEventListener("pointerdown", e => {
-  dragging=true;
-  moved=false;
-  previousX=e.clientX;
-  previousY=e.clientY;
-  frame.setPointerCapture(e.pointerId);
+function openPlace(p) {
+  currentPlace = p;
+  document.getElementById("modalTitle").textContent = p.name;
+  document.getElementById("modalPlace").textContent = p.name;
+  document.getElementById("modalCategory").textContent = p.category;
+  document.getElementById("modalCoords").textContent = p.coordinates;
+
+  showImage(document.getElementById("modalImage"),p.image);
+
+  const source = document.getElementById("sourceLink");
+  source.href = p.source || "https://images.nasa.gov/";
+  source.textContent = p.source
+    ? "View NASA source"
+    : "Search NASA image archive";
+
+  status.textContent = "";
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closePlace() {
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("closeModal").onclick = closePlace;
+
+overlay.addEventListener("click",e=>{
+  if(e.target===overlay) closePlace();
 });
-frame.addEventListener("pointermove",e=>{
-  if(!dragging)return;
-  const dx=e.clientX-previousX;
-  const dy=e.clientY-previousY;
-  if(Math.abs(dx)+Math.abs(dy)>1)moved=true;
-  rotation+=dx*.008;
-  tilt=Math.max(-1.2,Math.min(1.2,tilt+dy*.005));
-  previousX=e.clientX;
-  previousY=e.clientY;
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape") closePlace();
 });
-function endDrag(){dragging=false;}
-frame.addEventListener("pointerup",endDrag);
-frame.addEventListener("pointercancel",endDrag);
 
-frame.addEventListener("wheel",e=>{
-  e.preventDefault();
-  zoom=Math.max(.65,Math.min(1.45,
-    zoom+(e.deltaY<0?.08:-.08)));
-},{passive:false});
-
-let touchDistance=0;
-frame.addEventListener("touchstart",e=>{
-  if(e.touches.length===2) {
-    touchDistance=Math.hypot(
-      e.touches[0].clientX-e.touches[1].clientX,
-      e.touches[0].clientY-e.touches[1].clientY);
-  }
-},{passive:true});
-frame.addEventListener("touchmove",e=>{
-  if(e.touches.length===2) {
-    const d=Math.hypot(
-      e.touches[0].clientX-e.touches[1].clientX,
-      e.touches[0].clientY-e.touches[1].clientY);
-    if(touchDistance) {
-      zoom=Math.max(.65,Math.min(1.45,
-        zoom*d/touchDistance));
-    }
-    touchDistance=d;
-  }
-},{passive:true});
-
-const reducedMotion=window.matchMedia(
-  "(prefers-reduced-motion: reduce)").matches;
-
-function animate(time) {
-  const dt=Math.min(50,time-lastFrame||16);
-  lastFrame=time;
-  if(!dragging&&!reducedMotion) {
-    rotation+=dt*.000075;
-  }
-  drawStars(time);
-  drawPlanet();
-  requestAnimationFrame(animate);
-}
-requestAnimationFrame(animate);
-
-// Prototype buttons: no fake registration or checkout.
-document.getElementById("exploreBtn")
-  .addEventListener("click",()=>{
-    document.getElementById("marsSection")
-      .scrollIntoView({behavior:"smooth",block:"center"});
+document.querySelectorAll(".filter").forEach(button=>{
+  button.addEventListener("click",()=>{
+    document.querySelectorAll(".filter")
+      .forEach(b=>b.classList.remove("active"));
+    button.classList.add("active");
+    renderGallery(button.dataset.filter);
   });
-document.getElementById("aboutBtn")
-  .addEventListener("click",()=>{
-    alert(
-      "ASTERRA — THE FIRST MILLION\n\n"+
-      "Generation One is the first generation of "+
-      "one million digital Mars participants.\n\n"+
-      "This is an early interactive preview. "+
-      "Registration and payments are not yet active."
+});
+
+function selectedUrl() {
+  return location.origin + location.pathname +
+    "#place-" + currentPlace.id;
+}
+
+document.getElementById("copyPreview").onclick = async ()=>{
+  if(!currentPlace) return;
+  try {
+    await navigator.clipboard.writeText(selectedUrl());
+    status.textContent = "Place link copied.";
+  } catch {
+    status.textContent = "Copying is unavailable in this browser.";
+  }
+};
+
+document.getElementById("sharePreview").onclick = async ()=>{
+  if(!currentPlace) return;
+
+  const data = {
+    title:"ASTERRA — " + currentPlace.name,
+    text:"Explore this place on Mars with ASTERRA.",
+    url:selectedUrl()
+  };
+
+  try {
+    if(navigator.share) {
+      await navigator.share(data);
+    } else {
+      await navigator.clipboard.writeText(data.url);
+      status.textContent = "Link copied. Share it anywhere.";
+    }
+  } catch(e) {
+    if(e.name!=="AbortError") {
+      status.textContent = "Sharing is unavailable here.";
+    }
+  }
+};
+
+/*
+  Load image references from NASA's public image catalog.
+  This is a development preview, not a verified curated
+  production photo library.
+*/
+
+async function loadNASA(p) {
+  const url = "https://images-api.nasa.gov/search?" +
+    new URLSearchParams({
+      q:p.query,
+      media_type:"image",
+      page_size:"15"
+    });
+
+  try {
+    const response = await fetch(url);
+    if(!response.ok) throw new Error("NASA request failed");
+
+    const json = await response.json();
+    const items = json.collection?.items || [];
+
+    const item = items.find(item=>
+      item.links?.some(link=>link.href)
     );
-  });
+
+    if(!item) return;
+
+    const imageLink = item.links.find(link=>link.href);
+    const metadata = item.data?.[0];
+
+    p.image = imageLink.href;
+    p.source = metadata?.nasa_id
+      ? "https://images.nasa.gov/details/" +
+        encodeURIComponent(metadata.nasa_id)
+      : "https://images.nasa.gov/";
+
+    renderGallery(
+      document.querySelector(".filter.active").dataset.filter
+    );
+
+    if(currentPlace?.id===p.id) {
+      showImage(document.getElementById("modalImage"),p.image);
+    }
+
+    if(p.id==="valles-marineris") {
+      showImage(document.getElementById("heroImage"),p.image);
+      showImage(document.getElementById("featureImage"),p.image);
+      showImage(document.getElementById("cardImage"),p.image);
+      document.getElementById("cardLocation").textContent =
+        p.name.toUpperCase() + " · PREVIEW";
+    }
+  } catch(e) {
+    console.warn("NASA image unavailable:",p.name);
+  }
+}
+
+function restorePlaceFromHash() {
+  const id = decodeURIComponent(location.hash.slice(7));
+  const p = places.find(place=>place.id===id);
+  if(p) openPlace(p);
+}
+
+renderGallery();
+places.forEach(loadNASA);
+
+if(location.hash.startsWith("#place-")) {
+  restorePlaceFromHash();
+}
+window.addEventListener("hashchange",()=>{
+  if(location.hash.startsWith("#place-")) {
+    restorePlaceFromHash();
+  }
+});
 </script>
 </body>
 </html>
