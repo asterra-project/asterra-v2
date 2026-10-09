@@ -2,539 +2,519 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#090b0f">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090b0e">
 <title>ASTERRA — THE FIRST MILLION</title>
-<meta name="description" content="ASTERRA. The First Million. Generation One. Choose your place on Mars.">
-
 <style>
-:root {
-  --bg:#090b0f;
-  --panel:#12151a;
-  --line:#30343b;
-  --text:#f3f0ea;
-  --muted:#a5a4a2;
-  --accent:#d7a36c;
+:root{
+  --bg:#080a0d;--panel:#101318;--line:#30343b;
+  --text:#f4f1ec;--muted:#aaa7a4;--gold:#d6a16b;
+  --cream:#f2ddbd
 }
-* {box-sizing:border-box}
-html {scroll-behavior:smooth}
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
   font-family:Arial,Helvetica,sans-serif;
-  -webkit-font-smoothing:antialiased;
+  -webkit-font-smoothing:antialiased
 }
-button,input {font:inherit}
-button {cursor:pointer}
-a {color:inherit;text-decoration:none}
-.wrap {width:min(1180px,calc(100% - 40px));margin:auto}
-header {
-  border-bottom:1px solid var(--line);
-  background:#090b0fee;
-  position:sticky;
-  top:0;
-  z-index:20;
-  backdrop-filter:blur(15px);
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible{
+  outline:2px solid var(--gold);outline-offset:3px
 }
-.nav {
-  min-height:76px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:20px;
+.shell{max-width:1390px;margin:auto;padding:12px}
+.top{
+  min-height:78px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+  padding:0 34px;position:relative;z-index:2
 }
-.logo {
-  font-size:25px;
-  font-weight:700;
-  letter-spacing:5px;
+.logo{font-size:27px;letter-spacing:7px;font-weight:400}
+.nav{display:flex;align-items:center;gap:28px}
+.nav a{
+  font-size:11px;letter-spacing:.5px;color:#ddd;
+  white-space:nowrap
 }
-.navlinks {display:flex;gap:28px;align-items:center}
-.navlinks a {font-size:12px;letter-spacing:1.5px;color:#ccc}
-.navlinks a:hover {color:var(--accent)}
-.tag {
-  color:var(--accent);
-  font-size:11px;
-  letter-spacing:3px;
-  font-weight:bold;
-}
-.hero {
-  position:relative;
-  min-height:510px;
-  display:flex;
-  align-items:center;
-  overflow:hidden;
+.nav a:hover{color:var(--gold)}
+.top-right{font-size:12px;color:#ddd}
+.hero{
+  position:relative;overflow:hidden;
+  min-height:330px;display:flex;align-items:center;
   background:
-    linear-gradient(90deg,#090b0f 6%,#090b0fd9 43%,#090b0f22),
-    radial-gradient(ellipse at 75% 55%,#884a2b 0%,#362119 35%,#090b0f 75%);
+   linear-gradient(90deg,#090b0e 0%,#090b0ee6 30%,
+   #090b0e55 72%,#090b0e33 100%),
+   radial-gradient(ellipse at 75% 50%,#a05230,#311a16 60%,#080a0d)
 }
-.hero-art {
-  position:absolute;
-  right:-9%;
-  top:0;
-  width:76%;
-  height:100%;
-  object-fit:cover;
-  opacity:.56;
-  mask-image:linear-gradient(90deg,transparent,#000 45%);
+.hero-image{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;opacity:.65;
+  mask-image:linear-gradient(90deg,transparent 15%,black 70%)
 }
-.hero-content {position:relative;z-index:1;padding:85px 0}
-h1 {
-  font-size:clamp(45px,7vw,94px);
-  line-height:1.04;
-  letter-spacing:-3px;
-  margin:22px 0;
-  font-weight:700;
+.hero-copy{position:relative;padding:30px 34px;max-width:650px}
+.kicker{
+  color:var(--gold);letter-spacing:6px;font-size:12px;
+  font-weight:bold
 }
-.hero p {
-  color:#d2cfca;
-  max-width:490px;
-  font-size:17px;
-  line-height:1.7;
+h1{
+  font-weight:400;letter-spacing:1px;
+  font-size:clamp(42px,5.5vw,76px);
+  line-height:1.02;margin:12px 0
 }
-.btn {
-  display:inline-flex;
-  justify-content:center;
-  align-items:center;
-  min-height:48px;
-  padding:13px 23px;
-  border:1px solid var(--accent);
-  background:var(--accent);
-  color:#15110e;
-  font-size:12px;
-  letter-spacing:1.5px;
-  font-weight:bold;
-  text-align:center;
-  transition:.2s;
+.hero-copy p{
+  color:#e1dedb;font-size:15px;line-height:1.45;
+  max-width:410px;margin:0 0 23px
 }
-.btn:hover {filter:brightness(1.12)}
-.btn.outline {background:transparent;color:var(--accent)}
-.btn:disabled {opacity:.45;cursor:not-allowed}
-.actions {display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-section {padding:80px 0}
-.section-head {margin-bottom:32px}
-.section-head h2 {
-  font-size:clamp(29px,4vw,48px);
-  letter-spacing:-1px;
-  margin:12px 0;
+.explore{
+  border:0;background:transparent;color:#fff;
+  display:flex;align-items:center;gap:14px;
+  letter-spacing:3px;font-size:11px;padding:0
 }
-.section-head p {color:var(--muted);line-height:1.7}
-.filters {display:flex;gap:10px;flex-wrap:wrap;margin:30px 0}
-.filter {
-  padding:11px 16px;
-  background:transparent;
-  border:1px solid var(--line);
-  color:#c5c2bd;
-  font-size:11px;
-  letter-spacing:1.5px;
+.circle{
+  border:1px solid #ddd;border-radius:50%;
+  display:grid;place-items:center;width:37px;height:37px;
+  font-size:20px
 }
-.filter.active,.filter:hover {
-  color:var(--accent);
-  border-color:var(--accent);
+.hero-side{
+  position:absolute;right:34px;bottom:55px;
+  text-align:right;font-size:11px;line-height:1.8;
+  color:#f0eae3;letter-spacing:.5px
 }
-.gallery {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
+.main{
+  background:#080a0d;border:1px solid #222831;
+  border-radius:7px;overflow:hidden
 }
-.place {
-  min-width:0;
-  background:var(--panel);
-  border:1px solid var(--line);
-  overflow:hidden;
-  transition:border-color .2s,transform .2s;
+.filters{
+  display:flex;gap:30px;padding:16px 22px 19px;
+  overflow-x:auto;scrollbar-width:none
 }
-.place:hover {border-color:var(--accent);transform:translateY(-3px)}
-.photo {
-  position:relative;
-  aspect-ratio:4/3;
-  overflow:hidden;
-  background:linear-gradient(135deg,#38271f,#9c5d36 48%,#241c1c);
+.filters::-webkit-scrollbar{display:none}
+.filter{
+  border:0;background:transparent;color:#c7c4c0;
+  font-size:11px;white-space:nowrap;padding:5px 0
 }
-.photo img {
-  width:100%;
-  height:100%;
-  display:block;
-  object-fit:cover;
+.filter.active{
+  color:#fff;border-bottom:2px solid #fff
 }
-.photo .loading {
-  position:absolute;
-  inset:0;
-  display:grid;
-  place-items:center;
-  color:#e8c2a0;
-  font-size:11px;
-  letter-spacing:2px;
+.gallery{
+  display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:12px;padding:0 20px 18px
 }
-.photo:has(img[src]) .loading {display:none}
-.place-info {padding:20px}
-.place-info h3 {font-size:21px;margin:7px 0}
-.place-info p {font-size:13px;color:var(--muted);line-height:1.6}
-.place-bottom {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:10px;
-  margin-top:22px;
+.place{
+  background:#101318;border:1px solid #1d2229;
+  border-radius:5px;overflow:hidden;min-width:0
 }
-.price {font-size:22px;font-weight:bold;color:var(--accent)}
-.small-btn {
-  background:transparent;
-  border:1px solid var(--accent);
-  color:var(--accent);
-  padding:11px 14px;
-  font-size:11px;
-  letter-spacing:1px;
+.place-photo{
+  width:100%;aspect-ratio:1.16;object-fit:cover;
+  display:block;background:#42291d
 }
-.small-btn:hover {background:#d7a36c20}
-.feature {
-  display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
-  gap:42px;
-  align-items:center;
+.place-body{padding:11px 12px}
+.place-name{
+  font-size:12px;line-height:1.35;margin:0 0 6px;
+  overflow-wrap:anywhere
 }
-.feature-image {
-  aspect-ratio:5/4;
-  background:#35241e;
-  overflow:hidden;
+.coords{font-size:11px;color:#a7a8ad;line-height:1.5}
+.place-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:11px;gap:8px
 }
-.feature-image img {width:100%;height:100%;object-fit:cover}
-.feature h2 {font-size:clamp(30px,4vw,54px);margin:14px 0}
-.feature p {color:var(--muted);line-height:1.8}
-.details {border-top:1px solid var(--line);margin:24px 0}
-.detail {
-  padding:13px 0;
-  display:flex;
-  justify-content:space-between;
-  gap:15px;
-  border-bottom:1px solid var(--line);
-  font-size:13px;
+.price{font-size:18px;font-weight:bold}
+.plus{
+  width:25px;height:25px;border-radius:50%;
+  border:1px solid #ddd;color:#fff;background:transparent;
+  font-size:20px;line-height:1
 }
-.detail span:first-child {color:var(--muted)}
-.detail span:last-child {text-align:right;overflow-wrap:anywhere}
-.steps {
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:20px;
+.plus:hover{border-color:var(--gold);color:var(--gold)}
+.feature{
+  display:grid;grid-template-columns:1.3fr .85fr .75fr;
+  gap:24px;padding:0 20px 22px;align-items:center
 }
-.step {
-  border-top:1px solid var(--accent);
-  padding:23px 0;
+.feature-photo{
+  width:100%;aspect-ratio:1.7;object-fit:cover;
+  border-radius:5px;background:#3d271c
 }
-.step strong {color:var(--accent);font-size:13px}
-.step h3 {font-size:21px;margin:18px 0 10px}
-.step p {color:var(--muted);font-size:14px;line-height:1.7}
-.card-section {background:#101318}
-.certificate {
-  max-width:470px;
-  margin:auto;
-  border:1px solid #99744c;
-  padding:15px;
-  background:linear-gradient(145deg,#202024,#0c0e12);
-  box-shadow:0 25px 80px #0008;
+.thumbs{display:flex;gap:6px;margin-top:7px}
+.thumbs img{
+  width:calc(25% - 5px);aspect-ratio:1.6;
+  object-fit:cover;border-radius:3px
 }
-.certificate-inner {
-  border:1px solid #554432;
-  padding:25px;
-  min-width:0;
+.feature-name{font-size:29px;font-weight:400;margin:8px 0}
+.feature-description{
+  color:#b6b1ae;font-size:12px;line-height:1.7
 }
-.cert-top {
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  font-size:11px;
-  color:var(--accent);
-  letter-spacing:2px;
+.source{
+  display:inline-block;font-size:12px;text-decoration:underline;
+  margin:8px 0 12px;color:#ddd
 }
-.cert-photo {
-  width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  margin:25px 0 18px;
-  background:#35241e;
+.bigprice{font-size:27px;margin:10px 0}
+.goldbtn{
+  background:var(--cream);border:0;border-radius:30px;
+  color:#14100d;font-size:11px;font-weight:bold;
+  letter-spacing:.6px;padding:15px 20px;
+  width:100%;min-height:46px
 }
-.cert-number {
-  font-size:clamp(26px,6vw,42px);
-  letter-spacing:2px;
-  font-weight:700;
-  margin:10px 0;
-  overflow-wrap:anywhere;
+.goldbtn:hover{background:#ffe7c5}
+.goldbtn:disabled{opacity:.5;cursor:not-allowed}
+.info-panel{
+  border:1px solid #2b3037;border-radius:5px;
+  padding:10px 15px
 }
-.cert-meta {
-  color:#bcb5ad;
-  font-size:12px;
-  line-height:1.8;
+.info-row{
+  display:flex;align-items:center;gap:12px;
+  padding:16px 0;border-bottom:1px solid #30343b
 }
-.cert-bottom {
-  border-top:1px solid #554432;
-  margin-top:25px;
-  padding-top:16px;
-  color:var(--accent);
-  font-size:11px;
-  letter-spacing:2px;
+.info-row:last-child{border-bottom:0}
+.info-icon{
+  border:1px solid #444a50;border-radius:50%;
+  width:37px;height:37px;flex:none;
+  display:grid;place-items:center;font-size:18px
 }
-.preview-note {font-size:12px;color:var(--muted);text-align:center;margin-top:16px}
-footer {border-top:1px solid var(--line);padding:35px 0;color:var(--muted);font-size:12px}
-.footer-inner {display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.overlay {
-  position:fixed;
-  inset:0;
-  background:#000c;
-  display:none;
-  z-index:100;
-  padding:20px;
-  overflow-y:auto;
-  align-items:center;
-  justify-content:center;
+.info-row strong{display:block;font-size:12px;font-weight:400}
+.info-row small{
+  display:block;font-size:10px;color:#aaa;
+  margin-top:5px;line-height:1.5
 }
-.overlay.open {display:flex}
-.modal {
-  width:min(540px,100%);
-  max-height:calc(100vh - 40px);
-  overflow-y:auto;
-  background:#14171c;
-  border:1px solid #60513e;
-  padding:26px;
+.journey{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:10px;margin-top:10px
 }
-.modal-head {display:flex;justify-content:space-between;gap:15px;align-items:start}
-.modal-head h2 {font-size:28px;margin:7px 0 20px}
-.close {
-  border:0;
-  background:transparent;
-  color:white;
-  font-size:27px;
+.step{
+  border:1px solid #30343b;border-radius:6px;
+  padding:15px;min-width:0;background:#0e1115
 }
-.modal-image {
-  width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
-  background:#38271f;
+.step-title{
+  display:flex;gap:15px;align-items:start;margin-bottom:10px
 }
-.field-label {display:block;color:var(--muted);font-size:12px;margin:22px 0 8px}
-.email {
-  width:100%;
-  padding:14px;
-  border:1px solid var(--line);
-  background:#090b0f;
-  color:white;
-  outline:none;
+.step-number{font-size:24px;color:var(--gold)}
+.step h3{font-size:15px;font-weight:400;margin:4px 0 6px}
+.step p{font-size:11px;color:#b7b7ba;line-height:1.5;margin:0}
+.step-image{
+  width:100%;aspect-ratio:1.35;object-fit:cover;
+  border-radius:5px;background:#39251e
 }
-.email:focus {border-color:var(--accent)}
-.notice {font-size:12px;color:var(--muted);line-height:1.7}
-.modal-buttons {display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.source {color:var(--accent);font-size:12px;text-decoration:underline}
-.status {font-size:12px;color:var(--accent);margin-top:12px;min-height:18px}
-[hidden] {display:none!important}
-
-@media(max-width:850px) {
-  .gallery {grid-template-columns:repeat(2,minmax(0,1fr))}
-  .feature {grid-template-columns:1fr}
-  .steps {grid-template-columns:1fr;gap:0}
-  .hero-art {width:100%;right:-25%;opacity:.4}
+.step-location{font-size:13px;margin:8px 0 4px}
+.step .goldbtn{margin-top:12px}
+.payment{
+  border:1px solid #30343b;border-radius:6px;
+  padding:12px;margin-top:12px
 }
-@media(max-width:580px) {
-  .wrap {width:calc(100% - 28px)}
-  .nav {min-height:65px}
-  .logo {font-size:19px;letter-spacing:3px}
-  .navlinks {gap:12px}
-  .navlinks a {font-size:10px;letter-spacing:0}
-  .navlinks a:last-child {display:none}
-  .hero {min-height:470px}
-  .hero-content {padding:70px 0}
-  h1 {font-size:clamp(39px,11vw,62px);letter-spacing:-1.5px}
-  .hero p {font-size:15px}
-  section {padding:55px 0}
-  .gallery {grid-template-columns:1fr;gap:16px}
-  .photo {aspect-ratio:16/10}
-  .filter {font-size:10px;padding:10px}
-  .feature {gap:25px}
-  .certificate-inner {padding:16px}
-  .cert-top {font-size:9px;letter-spacing:1px}
-  .modal {padding:17px}
-  .modal-head h2 {font-size:24px}
-  .btn {width:100%}
-  .modal-buttons .btn {width:100%}
+.payment-methods{
+  display:flex;justify-content:space-around;
+  font-size:12px;gap:8px;margin-bottom:12px
+}
+.payment input{
+  display:block;width:100%;padding:10px;margin:8px 0;
+  background:#1a1e25;border:1px solid #363b43;
+  color:#fff;border-radius:4px;font-size:12px
+}
+.payment .fake{
+  font-size:11px;color:#b7b5b3;
+  padding:10px;border:1px solid #343840;border-radius:4px;
+  margin:8px 0
+}
+.preview-card{
+  border:1px solid var(--gold);border-radius:9px;
+  background:linear-gradient(135deg,#27201c,#0b0d10 65%);
+  padding:13px;margin-top:13px
+}
+.card-logo{
+  color:var(--gold);text-align:center;
+  letter-spacing:4px;font-size:15px
+}
+.card-sub{
+  text-align:center;font-size:9px;letter-spacing:2px;
+  color:#d5ad7e;margin:4px 0 13px
+}
+.card-generation{
+  font-size:10px;color:var(--gold);letter-spacing:1px
+}
+.card-id{font-size:25px;letter-spacing:1px;margin:5px 0}
+.preview-card img{
+  width:100%;aspect-ratio:1.7;object-fit:cover;
+  display:block;border-radius:3px
+}
+.card-bottom{
+  display:flex;justify-content:space-between;
+  align-items:center;gap:8px;margin-top:10px
+}
+.card-bottom span{font-size:10px;line-height:1.5}
+.qr{
+  width:53px;height:53px;flex:none;
+  background:#d9b78c;display:grid;place-items:center;
+  color:#17110b;font-size:9px;text-align:center;padding:5px
+}
+.share-actions{display:grid;gap:7px;margin-top:13px}
+.share-actions button{
+  border:1px solid #3a3e46;border-radius:5px;
+  background:#12161c;color:#e9e9e9;
+  padding:10px;font-size:12px;text-align:left
+}
+.share-actions button:hover{border-color:var(--gold)}
+.footnote{
+  color:#999;font-size:11px;text-align:center;
+  padding:22px 12px 12px;line-height:1.7
+}
+.modal-back{
+  display:none;position:fixed;inset:0;z-index:50;
+  background:#000c;align-items:center;justify-content:center;
+  padding:18px
+}
+.modal-back.open{display:flex}
+.modal{
+  width:min(500px,100%);max-height:90vh;overflow-y:auto;
+  border:1px solid #5b4a3a;background:#101318;padding:23px
+}
+.modal-head{
+  display:flex;justify-content:space-between;
+  gap:15px;align-items:start
+}
+.modal h2{font-weight:400;font-size:27px;margin:10px 0}
+.close{
+  background:transparent;border:0;color:white;font-size:26px
+}
+.modal img{
+  width:100%;aspect-ratio:1.7;object-fit:cover;
+  margin:8px 0
+}
+.modal label{display:block;font-size:11px;color:#bbb;margin:18px 0 8px}
+.modal input{
+  width:100%;padding:12px;background:#090b0e;
+  border:1px solid #444;color:#fff
+}
+.modal .goldbtn{margin-top:18px}
+.modal-note{color:#aaa;font-size:12px;line-height:1.6}
+.modal-source{
+  display:block;font-size:12px;text-decoration:underline;
+  margin-top:12px;color:var(--gold)
+}
+@media(max-width:1100px){
+  .gallery{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .feature{grid-template-columns:1fr 1fr}
+  .info-panel{grid-column:1/-1}
+  .journey{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .nav{gap:14px}
+}
+@media(max-width:650px){
+  .shell{padding:0}
+  .main{border-radius:0;border-left:0;border-right:0}
+  .top{min-height:67px;padding:0 17px}
+  .logo{font-size:21px;letter-spacing:4px}
+  .nav{display:none}
+  .top-right{font-size:10px}
+  .hero{min-height:390px;align-items:start}
+  .hero-image{opacity:.58;mask-image:none}
+  .hero:after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,#080a0de6,#080a0d33),
+               linear-gradient(0deg,#080a0d88,transparent 55%)
+  }
+  .hero-copy{z-index:1;padding:45px 18px}
+  h1{font-size:clamp(44px,12vw,66px)}
+  .kicker{font-size:10px;letter-spacing:4px}
+  .hero-copy p{font-size:13px;max-width:285px}
+  .hero-side{display:none}
+  .filters{gap:23px;padding:18px}
+  .gallery{grid-template-columns:1fr 1fr;gap:10px;padding:0 12px 20px}
+  .place-photo{aspect-ratio:1.2}
+  .place-body{padding:10px}
+  .place-name{font-size:12px}
+  .coords{font-size:10px}
+  .feature{grid-template-columns:1fr;padding:0 12px 20px}
+  .info-panel{grid-column:auto}
+  .journey{grid-template-columns:1fr;gap:10px;margin:10px 12px}
+  .step{padding:18px}
+  .step-image{aspect-ratio:1.7}
+  .preview-card{max-width:350px;margin:14px auto}
+  .payment{max-width:400px;margin:15px auto 0}
+  .share-actions{max-width:400px;margin:15px auto}
 }
 </style>
 </head>
-
 <body>
+<div class="shell">
+  <div class="main">
+    <header class="top">
+      <a href="#" class="logo">ASTERRA</a>
+      <nav class="nav">
+        <a href="#gallery">ALL</a>
+        <a href="#gallery" data-nav="CANYONS">CANYONS</a>
+        <a href="#gallery" data-nav="CRATERS">CRATERS</a>
+        <a href="#gallery" data-nav="DUNES">DUNES</a>
+        <a href="#gallery" data-nav="MOUNTAINS">MOUNTAINS</a>
+      </nav>
+      <span class="top-right">THE FIRST MILLION</span>
+    </header>
 
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#">ASTERRA</a>
-    <nav class="navlinks">
-      <a href="#explore">EXPLORE</a>
-      <a href="#generation">GENERATION ONE</a>
-      <a href="#how">HOW IT WORKS</a>
-    </nav>
-  </div>
-</header>
-
-<main>
-
-<div class="hero">
-  <img id="heroImage" class="hero-art" alt="Mars landscape">
-  <div class="wrap hero-content">
-    <div class="tag">ASTERRA · GENERATION ONE</div>
-    <h1>THE FIRST<br>MILLION</h1>
-    <p>Choose your favorite place on Mars.
-       Join the first generation and receive
-       your own unique digital identity.</p>
-    <div class="actions">
-      <a class="btn" href="#explore">EXPLORE MARS</a>
-      <a class="btn outline" href="#generation">GENERATION ONE</a>
-    </div>
-  </div>
-</div>
-
-<section id="explore">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">DISCOVER MARS</div>
-      <h2>Explore the surface</h2>
-      <p>Discover remarkable places on Mars.
-         Choose the location that speaks to you.</p>
+    <div class="hero">
+      <img class="hero-image" id="heroImg" alt="Mars landscape">
+      <div class="hero-copy">
+        <div class="kicker">GENERATION ONE</div>
+        <h1>THE FIRST<br>MILLION</h1>
+        <p>Choose a real place on Mars.<br>
+           Get your personal card.<br>
+           Share your place.</p>
+        <a class="explore" href="#gallery">
+          <span class="circle">↓</span> EXPLORE PLACES
+        </a>
+      </div>
+      <div class="hero-side">
+        REAL IMAGES<br>REAL COORDINATES<br>
+        A PART OF THE FIRST MILLION
+      </div>
     </div>
 
     <div class="filters" id="filters">
-      <button class="filter active" data-filter="ALL">ALL</button>
-      <button class="filter" data-filter="CANYONS">CANYONS</button>
-      <button class="filter" data-filter="CRATERS">CRATERS</button>
-      <button class="filter" data-filter="DUNES">DUNES</button>
-      <button class="filter" data-filter="MOUNTAINS">MOUNTAINS</button>
+      <button class="filter active" data-cat="ALL">ALL</button>
+      <button class="filter" data-cat="CANYONS">CANYONS</button>
+      <button class="filter" data-cat="CRATERS">CRATERS</button>
+      <button class="filter" data-cat="DUNES">DUNES</button>
+      <button class="filter" data-cat="MOUNTAINS">MOUNTAINS</button>
     </div>
 
     <div class="gallery" id="gallery"></div>
-  </div>
-</section>
 
-<section id="generation" class="card-section">
-  <div class="wrap">
-    <div class="feature">
-      <div class="feature-image">
-        <img id="featureImage" alt="Selected Mars location">
+    <div class="feature" id="feature">
+      <div>
+        <img class="feature-photo" id="featureImg" alt="Selected Mars place">
+        <div class="thumbs" id="thumbs"></div>
       </div>
       <div>
-        <div class="tag">ASTERRA · GENERATION ONE</div>
-        <h2>THE FIRST MILLION</h2>
-        <p>One million unique identities.
-           One first generation.
-           Your number becomes part of ASTERRA's history.</p>
-        <div class="details">
-          <div class="detail"><span>MEMBERSHIP</span><span>GENERATION ONE</span></div>
-          <div class="detail"><span>PERSONAL ID</span><span>Assigned after payment</span></div>
-          <div class="detail"><span>DIGITAL CARD</span><span>Included</span></div>
-          <div class="detail"><span>PRICE</span><span>$5</span></div>
+        <div class="kicker" id="featureCategory">MOUNTAINS</div>
+        <h2 class="feature-name" id="featureName">Olympus Mons</h2>
+        <div class="coords" id="featureCoords"></div>
+        <p class="feature-description" id="featureDesc"></p>
+        <a class="source" id="featureSource" target="_blank" rel="noopener">
+          View NASA source ↗
+        </a>
+        <div class="bigprice">$5</div>
+        <button class="goldbtn" id="chooseFeature">CHOOSE THIS PLACE</button>
+      </div>
+      <div class="info-panel">
+        <div class="info-row">
+          <div class="info-icon">▧</div>
+          <div><strong>Real image from NASA</strong>
+          <small>Source and reference</small></div>
         </div>
-        <a href="#explore" class="btn">CHOOSE YOUR PLACE — $5</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="how">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="tag">SIMPLE BY DESIGN</div>
-      <h2>How it works</h2>
-    </div>
-    <div class="steps">
-      <div class="step">
-        <strong>01</strong>
-        <h3>Choose a place</h3>
-        <p>Explore authentic images of Mars and select your favorite location.</p>
-      </div>
-      <div class="step">
-        <strong>02</strong>
-        <h3>Pay $5</h3>
-        <p>No account required. Email is optional. Secure payment will be available at launch.</p>
-      </div>
-      <div class="step">
-        <strong>03</strong>
-        <h3>Save and share</h3>
-        <p>Receive your digital card and share it on Instagram, Facebook, X and elsewhere.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="card-section">
-  <div class="wrap">
-    <div class="section-head" style="text-align:center">
-      <div class="tag">YOUR DIGITAL IDENTITY</div>
-      <h2>GENERATION ONE</h2>
-      <p>A personal digital card. A unique number. Your chosen place on Mars.</p>
-    </div>
-    <div class="certificate">
-      <div class="certificate-inner">
-        <div class="cert-top">
-          <strong>ASTERRA</strong>
-          <span>GENERATION ONE</span>
+        <div class="info-row">
+          <div class="info-icon">⌖</div>
+          <div><strong>Real location</strong>
+          <small>Coordinates verified before launch</small></div>
         </div>
-        <img id="cardImage" class="cert-photo" alt="Mars location">
-        <div class="tag">THE FIRST MILLION</div>
-        <div class="cert-number">#000001</div>
-        <div class="cert-meta" id="cardLocation">EXAMPLE CARD · LOCATION PREVIEW</div>
-        <div class="cert-bottom">ASTERRA · THE FIRST MILLION</div>
+        <div class="info-row">
+          <div class="info-icon">◇</div>
+          <div><strong>Your personal card</strong>
+          <small>Unique number. Share with the world.</small></div>
+        </div>
       </div>
     </div>
-    <div class="preview-note">
-      Example only. Real numbers are assigned after confirmed payment.
+  </div>
+
+  <div class="journey">
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">01</span>
+        <div><h3>Choose a place</h3>
+        <p>Explore Mars and find your favorite location.</p></div>
+      </div>
+      <img id="stepImg" class="step-image" alt="Mars">
+      <div class="step-location" id="stepName">Olympus Mons</div>
+      <div class="coords" id="stepCoords"></div>
+      <div class="bigprice">$5</div>
+      <button class="goldbtn" id="stepChoose">CHOOSE THIS PLACE</button>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">02</span>
+        <div><h3>Make a payment</h3>
+        <p>Just $5. No registration. Email optional.</p></div>
+      </div>
+      <div class="payment">
+        <div class="payment-methods">
+          <span>CARD</span><span>PayPal</span><span>Google Pay</span>
+        </div>
+        <div class="fake">Secure checkout will appear here at launch.</div>
+        <input type="email" placeholder="Email (optional)" aria-label="Email optional" disabled>
+        <button class="goldbtn" disabled>PAY $5 · COMING SOON</button>
+        <p class="modal-note">No payments are collected in this preview.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">03</span>
+        <div><h3>Get your card</h3>
+        <p>After payment, receive your unique personal card.</p></div>
+      </div>
+      <div class="preview-card" id="previewCard">
+        <div class="card-logo">ASTERRA</div>
+        <div class="card-sub">THE FIRST MILLION</div>
+        <div class="card-generation">GENERATION ONE</div>
+        <div class="card-id">#000247</div>
+        <img id="cardImg" alt="Selected Mars location">
+        <div class="card-bottom">
+          <span id="cardPlace">Olympus Mons<br>PREVIEW ONLY</span>
+          <div class="qr">QR AT<br>LAUNCH</div>
+        </div>
+        <div class="card-sub" style="margin-top:15px">
+          THE FIRST MILLION
+        </div>
+      </div>
+      <p class="modal-note">
+        Example card only. A real number and QR code
+        are generated after confirmed payment.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-title">
+        <span class="step-number">04</span>
+        <div><h3>Share your place</h3>
+        <p>Save and share your digital card anywhere.</p></div>
+      </div>
+      <div class="share-actions">
+        <button id="saveBtn">↓ &nbsp; Save preview image</button>
+        <button id="instagramBtn">◎ &nbsp; Instagram</button>
+        <button id="xBtn">𝕏 &nbsp; Share to X</button>
+        <button id="facebookBtn">f &nbsp; Share to Facebook</button>
+        <button id="copyBtn">↗ &nbsp; Copy place link</button>
+        <button disabled>✉ &nbsp; Email delivery · at launch</button>
+      </div>
+      <p class="modal-note" id="shareStatus"></p>
     </div>
   </div>
-</section>
 
-</main>
-
-<footer>
-  <div class="wrap footer-inner">
-    <span>© ASTERRA · THE FIRST MILLION</span>
-    <span>Digital identity only. No land ownership or official citizenship.</span>
+  <div class="footnote">
+    ASTERRA · THE FIRST MILLION · GENERATION ONE<br>
+    Digital collectible identity. No real land ownership or official citizenship.<br>
+    Preview only. No real payments or issued membership numbers.
   </div>
-</footer>
+</div>
 
-<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+<div class="modal-back" id="modalBack" role="dialog"
+     aria-modal="true" aria-labelledby="modalTitle">
   <div class="modal">
     <div class="modal-head">
       <div>
-        <div class="tag">YOUR SELECTED PLACE</div>
-        <h2 id="modalTitle">Location</h2>
+        <div class="kicker">GENERATION ONE</div>
+        <h2 id="modalTitle">Selected place</h2>
       </div>
-      <button class="close" id="closeModal" aria-label="Close">×</button>
+      <button class="close" id="modalClose" aria-label="Close">×</button>
     </div>
-
-    <img class="modal-image" id="modalImage" alt="Selected Mars landscape">
-
-    <div class="details">
-      <div class="detail"><span>LOCATION</span><span id="modalPlace"></span></div>
-      <div class="detail"><span>CATEGORY</span><span id="modalCategory"></span></div>
-      <div class="detail"><span>COORDINATES</span><span id="modalCoords"></span></div>
-      <div class="detail"><span>PRICE</span><span>$5</span></div>
-    </div>
-
-    <a id="sourceLink" class="source" target="_blank" rel="noopener">
-      View original NASA image and source
-    </a>
-
-    <label class="field-label" for="email">EMAIL (OPTIONAL)</label>
-    <input class="email" id="email" type="email" placeholder="you@example.com">
-
-    <p class="notice">
-      Email is optional. At launch, it can be used to send
-      your digital card. No account registration required.
+    <img id="modalImg" alt="Selected Mars location">
+    <p class="coords" id="modalCoords"></p>
+    <p class="modal-note" id="modalDesc"></p>
+    <a id="modalSource" class="modal-source"
+       target="_blank" rel="noopener">View NASA source ↗</a>
+    <div class="bigprice">$5</div>
+    <label for="optionalEmail">EMAIL (OPTIONAL)</label>
+    <input type="email" id="optionalEmail" placeholder="you@example.com">
+    <p class="modal-note">
+      No account required. Email can be used to deliver
+      your card when payments are enabled.
     </p>
-
-    <div class="modal-buttons">
-      <button class="btn" id="payButton" disabled>PAY $5 · COMING SOON</button>
-      <button class="btn outline" id="sharePreview">SHARE PLACE</button>
-      <button class="btn outline" id="copyPreview">COPY PLACE LINK</button>
-    </div>
-    <div class="status" id="status"></div>
-    <p class="notice">
-      This is a preview. Payment and personal ID issuance
-      are not active yet.
-    </p>
+    <button class="goldbtn" disabled>PAY $5 · COMING SOON</button>
+    <p class="modal-note">Test preview. No payment is active.</p>
   </div>
 </div>
 
@@ -542,279 +522,296 @@ footer {border-top:1px solid var(--line);padding:35px 0;color:var(--muted);font-
 "use strict";
 
 /*
-  NASA image search:
-  We load original NASA catalog results rather than
-  stretching an AI-generated screenshot.
-
-  Some catalog results may have no preview image.
-  In that case, a neutral placeholder remains visible.
-
-  Coordinates are deliberately not invented.
-  They will be added only after source verification.
+  IMPORTANT:
+  This is a visual prototype.
+  NASA image search results are loaded dynamically.
+  Before launch, every photo and coordinate must be
+  manually checked and stored as a fixed catalog entry.
 */
 
-const places = [
+const places=[
   {
-    id:"valles-marineris",
-    name:"Valles Marineris",
-    category:"CANYONS",
-    query:"Valles Marineris Mars",
-    description:"The immense canyon system of Mars.",
-    coordinates:"Source verification pending"
-  },
-  {
-    id:"gale-crater",
-    name:"Gale Crater",
-    category:"CRATERS",
-    query:"Gale Crater Mars Curiosity",
-    description:"An extraordinary landscape explored by Curiosity.",
-    coordinates:"Source verification pending"
-  },
-  {
-    id:"martian-dunes",
-    name:"Martian Dunes",
-    category:"DUNES",
-    query:"Mars sand dunes HiRISE",
-    description:"Sculpted patterns across the Martian surface.",
-    coordinates:"Source verification pending"
-  },
-  {
-    id:"olympus-mons",
-    name:"Olympus Mons",
-    category:"MOUNTAINS",
-    query:"Olympus Mons Mars",
-    description:"The giant volcanic mountain of Mars.",
-    coordinates:"Source verification pending"
-  },
-  {
-    id:"noctis-labyrinthus",
-    name:"Noctis Labyrinthus",
+    id:"noctis",name:"Noctis Labyrinthus",
     category:"CANYONS",
     query:"Noctis Labyrinthus Mars",
-    description:"A dramatic network of valleys and fractures.",
-    coordinates:"Source verification pending"
+    desc:"A vast network of valleys and fractures.",
+    coords:"Coordinates pending verification"
   },
   {
-    id:"jezero-crater",
-    name:"Jezero Crater",
+    id:"olympus",name:"Olympus Mons",
+    category:"MOUNTAINS",
+    query:"Olympus Mons Mars volcano",
+    desc:"The largest volcano in the Solar System.",
+    coords:"Coordinates pending verification"
+  },
+  {
+    id:"danielson",name:"Danielson Crater",
     category:"CRATERS",
-    query:"Jezero Crater Mars Perseverance",
-    description:"A remarkable location explored by Perseverance.",
-    coordinates:"Source verification pending"
+    query:"Danielson Crater Mars",
+    desc:"A crater famous for its layered deposits.",
+    coords:"Coordinates pending verification"
+  },
+  {
+    id:"dunes",name:"Olympia Undae",
+    category:"DUNES",
+    query:"Olympia Undae Mars dunes",
+    desc:"A vast field of dunes near the Martian north pole.",
+    coords:"Coordinates pending verification"
+  },
+  {
+    id:"valles",name:"Valles Marineris",
+    category:"CANYONS",
+    query:"Valles Marineris Mars",
+    desc:"One of the greatest canyon systems in the Solar System.",
+    coords:"Coordinates pending verification"
+  },
+  {
+    id:"elysium",name:"Elysium Montes",
+    category:"MOUNTAINS",
+    query:"Elysium Mons Mars",
+    desc:"A remarkable volcanic region on Mars.",
+    coords:"Coordinates pending verification"
   }
 ];
 
-const gallery = document.getElementById("gallery");
-const overlay = document.getElementById("overlay");
-const status = document.getElementById("status");
-let currentPlace = null;
+let selected=places[1];
+let activeCategory="ALL";
 
-function el(tag,className,text) {
-  const node = document.createElement(tag);
-  if(className) node.className = className;
-  if(text !== undefined) node.textContent = text;
-  return node;
+const $=id=>document.getElementById(id);
+
+function setImg(element,place){
+  element.removeAttribute("src");
+  element.alt=place.name;
+  if(place.image)element.src=place.image;
 }
 
-function showImage(img,url) {
-  if(!url) {
-    img.removeAttribute("src");
-    img.alt = "NASA image not available";
-    return;
-  }
-  img.src = url;
+function placeLink(p){
+  return location.origin+location.pathname+"#place-"+p.id;
 }
 
-function renderGallery(filter="ALL") {
+function selectPlace(p){
+  selected=p;
+  $("featureName").textContent=p.name;
+  $("featureCategory").textContent=p.category;
+  $("featureCoords").textContent=p.coords;
+  $("featureDesc").textContent=p.desc;
+  $("featureSource").href=p.source||"https://images.nasa.gov/";
+  $("stepName").textContent=p.name;
+  $("stepCoords").textContent=p.coords;
+  $("cardPlace").textContent=p.name+" · PREVIEW ONLY";
+
+  ["featureImg","stepImg","cardImg"].forEach(id=>{
+    setImg($(id),p);
+  });
+
+  $("thumbs").replaceChildren();
+  places.filter(x=>x.image).slice(0,4).forEach(x=>{
+    const img=document.createElement("img");
+    img.src=x.image;
+    img.alt=x.name;
+    img.style.cursor="pointer";
+    img.onclick=()=>selectPlace(x);
+    $("thumbs").append(img);
+  });
+}
+
+function renderGallery(){
+  const gallery=$("gallery");
   gallery.replaceChildren();
 
-  places
-    .filter(p=>filter==="ALL" || p.category===filter)
-    .forEach(p=>{
-      const card = el("article","place");
-      const photo = el("div","photo");
-      const img = el("img");
-      img.alt = p.name;
-      img.loading = "lazy";
-      showImage(img,p.image);
-      photo.append(img);
+  places.filter(p=>
+    activeCategory==="ALL"||p.category===activeCategory
+  ).forEach(p=>{
+    const article=document.createElement("article");
+    article.className="place";
 
-      const loading = el("div","loading",
-        p.image ? "NASA IMAGE" : "IMAGE LOADING");
-      photo.append(loading);
+    const img=document.createElement("img");
+    img.className="place-photo";
+    img.loading="lazy";
+    setImg(img,p);
 
-      const info = el("div","place-info");
-      const category = el("div","tag",p.category);
-      const name = el("h3","",p.name);
-      const description = el("p","",p.description);
-      const bottom = el("div","place-bottom");
-      const price = el("span","price","$5");
-      const button = el("button","small-btn","SELECT PLACE");
+    const body=document.createElement("div");
+    body.className="place-body";
 
-      button.addEventListener("click",()=>openPlace(p));
+    const name=document.createElement("div");
+    name.className="place-name";
+    name.textContent=p.name;
 
-      bottom.append(price,button);
-      info.append(category,name,description,bottom);
-      card.append(photo,info);
-      gallery.append(card);
-    });
-}
+    const coords=document.createElement("div");
+    coords.className="coords";
+    coords.textContent=p.coords;
 
-function openPlace(p) {
-  currentPlace = p;
-  document.getElementById("modalTitle").textContent = p.name;
-  document.getElementById("modalPlace").textContent = p.name;
-  document.getElementById("modalCategory").textContent = p.category;
-  document.getElementById("modalCoords").textContent = p.coordinates;
+    const foot=document.createElement("div");
+    foot.className="place-foot";
 
-  showImage(document.getElementById("modalImage"),p.image);
+    const price=document.createElement("span");
+    price.className="price";
+    price.textContent="$5";
 
-  const source = document.getElementById("sourceLink");
-  source.href = p.source || "https://images.nasa.gov/";
-  source.textContent = p.source
-    ? "View NASA source"
-    : "Search NASA image archive";
+    const plus=document.createElement("button");
+    plus.className="plus";
+    plus.textContent="+";
+    plus.setAttribute("aria-label","Select "+p.name);
+    plus.onclick=()=>openModal(p);
 
-  status.textContent = "";
-  overlay.classList.add("open");
-  document.body.style.overflow = "hidden";
-}
+    foot.append(price,plus);
+    body.append(name,coords,foot);
+    article.append(img,body);
 
-function closePlace() {
-  overlay.classList.remove("open");
-  document.body.style.overflow = "";
-}
+    img.style.cursor="pointer";
+    img.onclick=()=>selectPlace(p);
 
-document.getElementById("closeModal").onclick = closePlace;
-
-overlay.addEventListener("click",e=>{
-  if(e.target===overlay) closePlace();
-});
-
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape") closePlace();
-});
-
-document.querySelectorAll(".filter").forEach(button=>{
-  button.addEventListener("click",()=>{
-    document.querySelectorAll(".filter")
-      .forEach(b=>b.classList.remove("active"));
-    button.classList.add("active");
-    renderGallery(button.dataset.filter);
+    gallery.append(article);
   });
-});
-
-function selectedUrl() {
-  return location.origin + location.pathname +
-    "#place-" + currentPlace.id;
 }
 
-document.getElementById("copyPreview").onclick = async ()=>{
-  if(!currentPlace) return;
-  try {
-    await navigator.clipboard.writeText(selectedUrl());
-    status.textContent = "Place link copied.";
-  } catch {
-    status.textContent = "Copying is unavailable in this browser.";
+function changeFilter(category){
+  activeCategory=category;
+  document.querySelectorAll(".filter").forEach(b=>{
+    b.classList.toggle("active",b.dataset.cat===category);
+  });
+  renderGallery();
+}
+
+document.querySelectorAll(".filter").forEach(b=>{
+  b.onclick=()=>changeFilter(b.dataset.cat);
+});
+
+document.querySelectorAll("[data-nav]").forEach(a=>{
+  a.onclick=()=>changeFilter(a.dataset.nav);
+});
+
+function openModal(p){
+  selectPlace(p);
+  $("modalTitle").textContent=p.name;
+  $("modalCoords").textContent=p.coords;
+  $("modalDesc").textContent=p.desc;
+  $("modalSource").href=p.source||"https://images.nasa.gov/";
+  setImg($("modalImg"),p);
+  $("modalBack").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeModal(){
+  $("modalBack").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+$("modalClose").onclick=closeModal;
+$("modalBack").onclick=e=>{
+  if(e.target===$("modalBack"))closeModal();
+};
+document.onkeydown=e=>{
+  if(e.key==="Escape")closeModal();
+};
+$("chooseFeature").onclick=()=>openModal(selected);
+$("stepChoose").onclick=()=>openModal(selected);
+
+$("copyBtn").onclick=async()=>{
+  try{
+    await navigator.clipboard.writeText(placeLink(selected));
+    $("shareStatus").textContent="Place link copied.";
+  }catch{
+    $("shareStatus").textContent="Copy unavailable in this browser.";
   }
 };
 
-document.getElementById("sharePreview").onclick = async ()=>{
-  if(!currentPlace) return;
+$("xBtn").onclick=()=>{
+  const text="ASTERRA — THE FIRST MILLION · "+selected.name;
+  window.open(
+    "https://twitter.com/intent/tweet?"+
+    new URLSearchParams({text,url:placeLink(selected)}),
+    "_blank","noopener,noreferrer"
+  );
+};
 
-  const data = {
-    title:"ASTERRA — " + currentPlace.name,
-    text:"Explore this place on Mars with ASTERRA.",
-    url:selectedUrl()
-  };
+$("facebookBtn").onclick=()=>{
+  window.open(
+    "https://www.facebook.com/sharer/sharer.php?"+
+    new URLSearchParams({u:placeLink(selected)}),
+    "_blank","noopener,noreferrer"
+  );
+};
 
-  try {
-    if(navigator.share) {
-      await navigator.share(data);
-    } else {
-      await navigator.clipboard.writeText(data.url);
-      status.textContent = "Link copied. Share it anywhere.";
+$("instagramBtn").onclick=async()=>{
+  if(navigator.share){
+    try{
+      await navigator.share({
+        title:"ASTERRA",
+        text:selected.name,
+        url:placeLink(selected)
+      });
+    }catch(e){
+      if(e.name!=="AbortError")
+        $("shareStatus").textContent="Sharing unavailable.";
     }
-  } catch(e) {
-    if(e.name!=="AbortError") {
-      status.textContent = "Sharing is unavailable here.";
-    }
+  }else{
+    $("shareStatus").textContent=
+      "Instagram image sharing will be enabled with the final card.";
   }
+};
+
+$("saveBtn").onclick=()=>{
+  $("shareStatus").textContent=
+    "Downloadable card image will be enabled with the final card generator.";
 };
 
 /*
-  Load image references from NASA's public image catalog.
-  This is a development preview, not a verified curated
-  production photo library.
+  NASA image catalog.
+  Images are previews, not approved source records.
 */
 
-async function loadNASA(p) {
-  const url = "https://images-api.nasa.gov/search?" +
-    new URLSearchParams({
-      q:p.query,
-      media_type:"image",
-      page_size:"15"
-    });
+async function loadImage(p){
+  try{
+    const url="https://images-api.nasa.gov/search?"+
+      new URLSearchParams({
+        q:p.query,media_type:"image",page_size:"20"
+      });
 
-  try {
-    const response = await fetch(url);
-    if(!response.ok) throw new Error("NASA request failed");
+    const response=await fetch(url);
+    if(!response.ok)throw Error("NASA unavailable");
 
-    const json = await response.json();
-    const items = json.collection?.items || [];
+    const json=await response.json();
+    const items=json.collection?.items||[];
 
-    const item = items.find(item=>
-      item.links?.some(link=>link.href)
-    );
+    const item=items.find(x=>
+      x.links?.some(l=>l.href&&l.render==="image")
+    )||items.find(x=>x.links?.some(l=>l.href));
 
-    if(!item) return;
+    if(!item)return;
 
-    const imageLink = item.links.find(link=>link.href);
-    const metadata = item.data?.[0];
+    const link=item.links.find(l=>l.href);
+    const meta=item.data?.[0];
 
-    p.image = imageLink.href;
-    p.source = metadata?.nasa_id
-      ? "https://images.nasa.gov/details/" +
-        encodeURIComponent(metadata.nasa_id)
-      : "https://images.nasa.gov/";
+    p.image=link.href;
+    p.source=meta?.nasa_id
+      ?"https://images.nasa.gov/details/"+
+        encodeURIComponent(meta.nasa_id)
+      :"https://images.nasa.gov/";
 
-    renderGallery(
-      document.querySelector(".filter.active").dataset.filter
-    );
+    renderGallery();
+    if(selected.id===p.id)selectPlace(p);
 
-    if(currentPlace?.id===p.id) {
-      showImage(document.getElementById("modalImage"),p.image);
+    if(p.id==="valles"){
+      $("heroImg").src=p.image;
     }
-
-    if(p.id==="valles-marineris") {
-      showImage(document.getElementById("heroImage"),p.image);
-      showImage(document.getElementById("featureImage"),p.image);
-      showImage(document.getElementById("cardImage"),p.image);
-      document.getElementById("cardLocation").textContent =
-        p.name.toUpperCase() + " · PREVIEW";
-    }
-  } catch(e) {
-    console.warn("NASA image unavailable:",p.name);
+  }catch(e){
+    console.warn("Image unavailable:",p.name);
   }
-}
-
-function restorePlaceFromHash() {
-  const id = decodeURIComponent(location.hash.slice(7));
-  const p = places.find(place=>place.id===id);
-  if(p) openPlace(p);
 }
 
 renderGallery();
-places.forEach(loadNASA);
+selectPlace(selected);
+places.forEach(loadImage);
 
-if(location.hash.startsWith("#place-")) {
-  restorePlaceFromHash();
+if(location.hash.startsWith("#place-")){
+  const p=places.find(x=>x.id===location.hash.slice(7));
+  if(p)selectPlace(p);
 }
-window.addEventListener("hashchange",()=>{
-  if(location.hash.startsWith("#place-")) {
-    restorePlaceFromHash();
-  }
-});
 </script>
 </body>
 </html>
+
+
+
+Как заменить код в GitHub
